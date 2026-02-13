@@ -209,7 +209,8 @@ function eonext_opening_hours_preprocess_dpl_react_app(array &$variables): void 
       continue;
     }
 
-    // Skip if we've already processed this term (avoids duplicates from translations).
+    // Skip if we've already processed this term
+    // (avoids duplicates from translations).
     $termId = $term->id();
     if (in_array($termId, $processedTermIds)) {
       continue;

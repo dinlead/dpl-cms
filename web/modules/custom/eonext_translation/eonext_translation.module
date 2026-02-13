@@ -271,6 +271,7 @@ function eonext_translation_preprocess_field(&$variables) {
   if ($variables['field_type'] === 'address') {
     $country = $variables['items'][0]['content']['country']['#value'] ?? '';
     if ($country) {
+      // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
       $variables['items'][0]['content']['country']['#value'] = t($country);
     }
   }

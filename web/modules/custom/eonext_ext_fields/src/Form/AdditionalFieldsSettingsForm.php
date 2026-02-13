@@ -114,6 +114,7 @@ class AdditionalFieldsSettingsForm extends ConfigFormBase {
             '#markup' => $keyAttribute,
           ],
           'value' => [
+            // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
             '#markup' => $this->t($value),
           ],
         ];

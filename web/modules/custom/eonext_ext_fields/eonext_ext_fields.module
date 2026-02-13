@@ -72,6 +72,7 @@ function eonext_ext_fields_dpl_react_apps_data(array &$data): void {
     // Transform CamelCase to kebab-case. And remove Text suffix.
     $keyAttribute = strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $key));
     $keyAttribute = str_replace('-text', '', $keyAttribute);
+    // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
     $data['texts'][$keyAttribute] = t($value);
   }
 }

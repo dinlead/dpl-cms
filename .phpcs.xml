@@ -6,6 +6,8 @@
   <file>web/themes/custom</file>
   <!-- Exclude built assets used by Novel -->
   <exclude-pattern>web/themes/custom/novel/assets/*</exclude-pattern>
+  <!-- Exclude minified CSS files -->
+  <exclude-pattern>*.min.css</exclude-pattern>
   <file>assets/all.settings.php</file>
   <!-- Exclude generated client -->
   <exclude-pattern>web/modules/custom/*/src/GraphQL/*</exclude-pattern>

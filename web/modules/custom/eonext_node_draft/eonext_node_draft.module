@@ -16,8 +16,6 @@ use Drupal\node\NodeInterface;
  * New nodes are considered those with same create and update time.
  */
 function eonext_node_draft_preprocess_views_view_field(array &$variables): void {
-  /** @var \Drupal\views\ViewExecutable $view */
-  $view = $variables['view'];
   /** @var \Drupal\views\ResultRow $row */
   $row = $variables['row'];
   /** @var \Drupal\node\NodeInterface $entity */

@@ -12,6 +12,8 @@ entity.eonext_library_staff.edit_form:
     _entity_form: 'eonext_library_staff.edit'
     _title: 'Staff'
   requirements:
+    # Allow open access: staff profile editing is guarded by the entity form
+    # which verifies the user matches the profile owner.
     _access: 'TRUE'
   options:
     parameters:

@@ -121,10 +121,5 @@ class AlphabeticalFilter extends FilterPluginBase {
     }
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  // Public function getCacheTags(): array {
-  //    return Cache::mergeTags(['node_list:e_resource'], parent::getCacheTags());
-  //  }
+  // @todo Re-enable cache tags when needed.
 }

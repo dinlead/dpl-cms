@@ -10,7 +10,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 /**
- *
+ * Fetches Bibdk subject hierarchy metadata from remote source.
  */
 class BibdkMetadataFetcher {
 
@@ -27,7 +27,10 @@ class BibdkMetadataFetcher {
   ) {}
 
   /**
+   * Fetches the Bibdk subject hierarchy XML file.
    *
+   * @param string $url
+   *   The URL to fetch the metadata from.
    */
   public function getBibdkMetadata(string $url = self::BIBDK_FILE_URL): void {
     try {
@@ -54,14 +57,23 @@ class BibdkMetadataFetcher {
   }
 
   /**
+   * Checks whether the Bibdk hierarchy file exists and is readable.
    *
+   * @return bool
+   *   TRUE if the file exists and is readable.
    */
   public function bibdkHierarchyFileExists(): bool {
     return is_readable(self::BIBDK_FILE_PATH . self::BIBDK_FILE_NAME);
   }
 
   /**
+   * Validates whether the input string is valid XML.
    *
+   * @param string $input
+   *   The string to validate.
+   *
+   * @return bool
+   *   TRUE if valid XML, FALSE otherwise.
    */
   protected function isXml(string $input): bool {
     $xml = simplexml_load_string($input);

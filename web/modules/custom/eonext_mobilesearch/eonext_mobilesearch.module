@@ -61,8 +61,10 @@ function eonext_mobilesearch_entity_delete(EntityInterface $entity): void {
 /**
  * Implements hook_mobilesearch_push_alter().
  *
- * @param \Drupal\eonext_mobilesearch\Mobilesearch\DTO\NodeEntityDto $payload
+ * @param \Drupal\eonext_mobilesearch\Mobilesearch\DTO\MobilesearchEntityInterface $payload
+ *   The mobilesearch payload to alter.
  * @param \Drupal\Core\Entity\EntityInterface $entity
+ *   The entity being pushed.
  */
 function eonext_mobilesearch_mobilesearch_push_alter(MobilesearchEntityInterface $payload, EntityInterface $entity): void {
   if ($entity->getEntityTypeId() === 'eventinstance') {
@@ -134,15 +136,5 @@ function eonext_mobilesearch_mobilesearch_push_alter(MobilesearchEntityInterface
     }
   }
 
-  // $removal_map = [
-  //    'vid',
-  //    'revision_timestamp', 'revision_log',
-  //    'status', 'promote',
-  //    'sticky', 'default_langcode',
-  //    'revision_default', 'revision_translation_affected',
-  //  ];
-  //  foreach ($removal_map as $field) {
-  //    unset($fields[$field]);
-  //  }
   $payload->setTaxonomy($taxonomy);
 }

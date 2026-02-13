@@ -2,16 +2,12 @@
 
 /**
  * @file
+ * Library staff logic.
  */
 
 use Drupal\user\UserInterface;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Views;
-
-/**
- * @file
- * Library staff logic.
- */
 
 /**
  * Implements hook_theme().

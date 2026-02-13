@@ -18,6 +18,8 @@ class EntityActionEvent extends Event {
    *
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   Event entity.
+   * @param string $action
+   *   The action to perform (insert, update, delete).
    */
   public function __construct(
     protected EntityInterface $entity,
@@ -60,7 +62,10 @@ class EntityActionEvent extends Event {
   }
 
   /**
+   * Maps the event action to an HTTP method.
    *
+   * @return string
+   *   The HTTP method (PUT, POST, DELETE).
    */
   public function getServiceAction(): string {
     return match ($this->action) {

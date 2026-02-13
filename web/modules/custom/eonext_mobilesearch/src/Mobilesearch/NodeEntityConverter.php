@@ -19,13 +19,22 @@ use Drupal\eonext_mobilesearch\Mobilesearch\DTO\TaxonomyDto;
  */
 class NodeEntityConverter extends AbstractEntityConverter {
 
+  /**
+   * The agency ID for mobilesearch communication.
+   *
+   * @var string
+   */
   protected string $agencyId;
 
   /**
    * Converter constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager service.
    * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entityFieldManager
+   *   The entity field manager service.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   The config factory service.
    */
   public function __construct(
     protected EntityTypeManagerInterface $entityTypeManager,
@@ -39,9 +48,7 @@ class NodeEntityConverter extends AbstractEntityConverter {
    * {@inheritDoc}
    */
   public function convert(EntityInterface $entity): NodeEntityDto {
-    // If (!$entity instanceof NodeInterface) {
-    //      throw new \RuntimeException('Only node entities can be used in this context.');
-    //    }.
+    // @todo Add entity type validation.
     $fieldDefinitions = $this->entityFieldManager->getFieldDefinitions(
       $entity->getEntityTypeId(),
       $entity->getType()
@@ -317,7 +324,16 @@ class NodeEntityConverter extends AbstractEntityConverter {
   }
 
   /**
+   * Resolve 'path' type field values.
    *
+   * @param \Drupal\Core\Entity\FieldableEntityInterface $node
+   *   Node object.
+   * @param string $fieldName
+   *   Field name, whose value(s) to resolve.
+   * @param \Drupal\Core\Field\FieldDefinitionInterface $fieldDefinition
+   *   Field definition.
+   * @param array $target
+   *   Target collection where resolved values are inserted.
    */
   protected function resolvePathAlias(FieldableEntityInterface $node, string $fieldName, FieldDefinitionInterface $fieldDefinition, array &$target): void {
     $mainProperty = $fieldDefinition->getFieldStorageDefinition()->getMainPropertyName();
@@ -330,7 +346,16 @@ class NodeEntityConverter extends AbstractEntityConverter {
   }
 
   /**
+   * Resolve 'daterange' type field values.
    *
+   * @param \Drupal\Core\Entity\FieldableEntityInterface $node
+   *   Node object.
+   * @param string $fieldName
+   *   Field name, whose value(s) to resolve.
+   * @param \Drupal\Core\Field\FieldDefinitionInterface $fieldDefinition
+   *   Field definition.
+   * @param array $target
+   *   Target collection where resolved values are inserted.
    */
   protected function resolveDates(FieldableEntityInterface $node, string $fieldName, FieldDefinitionInterface $fieldDefinition, array &$target): void {
     $target[$fieldName] = new FieldDto(

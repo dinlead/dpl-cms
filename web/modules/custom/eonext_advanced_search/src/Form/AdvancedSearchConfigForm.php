@@ -83,7 +83,7 @@ class AdvancedSearchConfigForm extends ConfigFormBase {
         '@url' => $module_path,
       ]),
       '#rows' => 20,
-      '#config_target' => self::CONFIG_ID . ':' . 'advanced_search_settings',
+      '#config_target' => self::CONFIG_ID . ':advanced_search_settings',
     ];
 
     return $form;

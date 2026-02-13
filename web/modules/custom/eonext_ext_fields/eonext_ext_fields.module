@@ -2,17 +2,16 @@
 
 /**
  * @file
+ * Extended fields module logic.
  */
 
 use Drupal\eonext_ext_fields\Form\AdditionalFieldsSettingsForm;
 
 /**
- * @file
- * Extended fields module logic.
- */
-
-/**
+ * Preprocesses DPL react app variables with extended field data.
  *
+ * @param array $variables
+ *   Theme hook variables.
  */
 function eonext_ext_fields_preprocess_dpl_react_app(array &$variables): void {
   $additional_fields_config = \Drupal::service('config.factory')

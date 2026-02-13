@@ -75,7 +75,7 @@ class AdditionalFieldsSettingsForm extends ConfigFormBase {
         '@url' => $module_path,
       ]),
       '#rows' => 20,
-      '#config_target' => self::CONFIG_ID . ':' . 'additional_fields',
+      '#config_target' => self::CONFIG_ID . ':additional_fields',
     ];
 
     $form['text_fields'] = [

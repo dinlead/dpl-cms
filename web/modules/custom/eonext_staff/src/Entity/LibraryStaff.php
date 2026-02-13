@@ -76,7 +76,7 @@ final class LibraryStaff extends ContentEntityBase implements LibraryStaffInterf
   }
 
   /**
-   *
+   * {@inheritdoc}
    */
   public function setUserId(int $userId) {
     $this->set('uid', $userId);

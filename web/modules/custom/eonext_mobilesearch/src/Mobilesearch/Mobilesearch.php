@@ -63,6 +63,11 @@ class Mobilesearch {
    *
    * @param \Drupal\eonext_mobilesearch\Mobilesearch\DTO\MobilesearchEntityInterface $payload
    *   Update payload.
+   * @param string $httpAction
+   *   The HTTP method to use (e.g., PUT, POST, DELETE).
+   *
+   * @return bool
+   *   TRUE if the push was successful.
    */
   public function push(MobilesearchEntityInterface $payload, string $httpAction): bool {
     $this->logger->info("Pushing {$payload->getEntityName()}: {$payload->getId()}");
@@ -95,12 +100,16 @@ class Mobilesearch {
   /**
    * Log service communication information.
    *
+   * @param string $url
+   *   The request URL.
+   * @param string $method
+   *   The HTTP method used.
    * @param \Drupal\eonext_mobilesearch\Mobilesearch\DTO\MobilesearchEntityInterface $payload
    *   Sent payload.
    * @param mixed $response
    *   Raw response.
-   * @param bool $error
-   *   Is an error logging.
+   * @param bool $isSuccess
+   *   Whether the request was successful.
    */
   protected function log(
     string $url,

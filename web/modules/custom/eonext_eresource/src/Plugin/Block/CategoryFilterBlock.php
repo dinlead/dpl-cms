@@ -85,10 +85,5 @@ class CategoryFilterBlock extends BlockBase implements ContainerFactoryPluginInt
     ];
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  // Public function getCacheTags(): array {
-  //    return Cache::mergeTags(['node_list:e_resource'], parent::getCacheTags());
-  //  }
+  // @todo Re-enable cache tags when needed.
 }

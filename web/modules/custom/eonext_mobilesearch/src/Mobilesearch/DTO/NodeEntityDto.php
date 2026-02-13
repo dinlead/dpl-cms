@@ -69,14 +69,20 @@ class NodeEntityDto implements MobilesearchEntityInterface {
   }
 
   /**
+   * Gets the node content type.
    *
+   * @return string
+   *   The content type.
    */
   public function getType(): string {
     return $this->type;
   }
 
   /**
+   * Sets the node content type.
    *
+   * @param string $type
+   *   The content type.
    */
   public function setType(string $type): void {
     $this->type = $type;
@@ -108,14 +114,23 @@ class NodeEntityDto implements MobilesearchEntityInterface {
   }
 
   /**
+   * Gets the taxonomy terms.
    *
+   * @return array
+   *   Taxonomy DTO array.
    */
   public function getTaxonomy(): array {
     return $this->taxonomy;
   }
 
   /**
+   * Sets the taxonomy terms.
    *
+   * @param array $taxonomy
+   *   Taxonomy DTO array.
+   *
+   * @return self
+   *   DTO object.
    */
   public function setTaxonomy(array $taxonomy): self {
     $this->taxonomy = $taxonomy;

@@ -22,7 +22,7 @@ content:
     label: above
     settings:
       link: true
-    third_party_settings: {  }
+    third_party_settings: {}
     weight: 1
     region: content
   field_button_link:
@@ -34,7 +34,7 @@ content:
       url_plain: false
       rel: ''
       target: ''
-    third_party_settings: {  }
+    third_party_settings: {}
     weight: 3
     region: content
   field_paragraph_title:
@@ -42,7 +42,7 @@ content:
     label: above
     settings:
       link_to_entity: false
-    third_party_settings: {  }
+    third_party_settings: {}
     weight: 0
     region: content
 hidden:

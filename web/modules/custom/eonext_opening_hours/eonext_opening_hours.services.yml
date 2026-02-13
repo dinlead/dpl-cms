@@ -1,9 +1,9 @@
 services:
   cache_context.day:
     class: Drupal\eonext_opening_hours\Cache\Context\DayCacheContext
-    arguments: ["@datetime.time"]
+    arguments: ['@datetime.time']
     tags:
-      - { name: cache.context, id: "day" }
+      - { name: cache.context, id: 'day' }
 
   eonext_opening_hours.response_subscriber:
     class: Drupal\eonext_opening_hours\EventSubscriber\OpeningHoursResponseSubscriber

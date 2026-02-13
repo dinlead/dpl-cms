@@ -15,7 +15,7 @@ label: 'Ribbon Color'
 description: ''
 required: false
 translatable: false
-default_value: {  }
+default_value: {}
 default_value_callback: ''
 settings:
   opacity: 0

@@ -12,7 +12,7 @@ label: 'Menu link title'
 description: 'The text to be used for this link in the menu.'
 required: true
 translatable: true
-default_value: {  }
+default_value: {}
 default_value_callback: ''
-settings: {  }
+settings: {}
 field_type: string

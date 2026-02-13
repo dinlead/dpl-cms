@@ -26,7 +26,7 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
-    third_party_settings: {  }
+    third_party_settings: {}
   field_button_link:
     type: link_default
     weight: 3
@@ -34,7 +34,7 @@ content:
     settings:
       placeholder_url: ''
       placeholder_title: ''
-    third_party_settings: {  }
+    third_party_settings: {}
   field_paragraph_title:
     type: string_textfield
     weight: 0
@@ -42,7 +42,7 @@ content:
     settings:
       size: 60
       placeholder: ''
-    third_party_settings: {  }
+    third_party_settings: {}
 hidden:
   created: true
   status: true

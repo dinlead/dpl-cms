@@ -9,11 +9,11 @@ id: eonext_library_staff.field_phone
 field_name: field_phone
 entity_type: eonext_library_staff
 type: telephone
-settings: {  }
+settings: {}
 module: telephone
 locked: false
 cardinality: 1
 translatable: true
-indexes: {  }
+indexes: {}
 persist_with_no_fields: false
 custom_storage: false

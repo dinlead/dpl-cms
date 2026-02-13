@@ -1,7 +1,11 @@
-(function (Drupal, once) {
+(function eresource(Drupal, once) {
   Drupal.behaviors.convertEcategoryToSelect = {
     attach(context) {
-      const wrapper = once('convert-select', '.e-resource-category-filter', context);
+      const wrapper = once(
+        'convert-select',
+        '.e-resource-category-filter',
+        context,
+      );
       if (!wrapper.length) return;
 
       const container = wrapper[0];
@@ -14,7 +18,7 @@
       let resizeTimeout = null;
 
       function throttle(func, delay) {
-        return function(...args) {
+        return function throttled(...args) {
           if (resizeTimeout) clearTimeout(resizeTimeout);
           resizeTimeout = setTimeout(() => func.apply(this, args), delay);
         };
@@ -30,11 +34,11 @@
 
         select = document.createElement('select');
         select.className = 'form-select dropdown__select';
-        select.onchange = function () {
+        select.onchange = function onSelectChange() {
           if (this.value) window.location.href = this.value;
         };
 
-        ul.querySelectorAll('li a').forEach(link => {
+        ul.querySelectorAll('li a').forEach((link) => {
           const option = document.createElement('option');
           option.className = 'dropdown__option';
           option.value = link.getAttribute('href');
@@ -51,7 +55,8 @@
 
         const arrowImg = document.createElement('img');
         arrowImg.className = 'dropdown__arrow';
-        arrowImg.src = '/themes/custom/novel/assets/dpl-design-system/icons/collection/ExpandMore.svg';
+        arrowImg.src =
+          '/themes/custom/novel/assets/dpl-design-system/icons/collection/ExpandMore.svg';
         arrowImg.alt = '';
 
         arrowsDiv.appendChild(arrowImg);
@@ -66,7 +71,10 @@
       function restoreList() {
         if (!select) return;
 
-        select.replaceWith(new DOMParser().parseFromString(originalHTML, 'text/html').body.firstChild);
+        select.replaceWith(
+          new DOMParser().parseFromString(originalHTML, 'text/html').body
+            .firstChild,
+        );
         select = null;
       }
 
@@ -83,6 +91,6 @@
 
       // Add throttled resize listener
       window.addEventListener('resize', throttle(handleResize, 250));
-    }
+    },
   };
 })(Drupal, once);

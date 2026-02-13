@@ -84,9 +84,9 @@ display:
           hide_alter_empty: true
           click_sort_column: value
           type: number_integer
-          settings: {  }
+          settings: {}
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -150,7 +150,7 @@ display:
           settings:
             link_to_entity: 0
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -227,7 +227,7 @@ display:
               refresh: 60
               description: ''
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -292,7 +292,7 @@ display:
           settings:
             link_to_entity: false
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -360,7 +360,7 @@ display:
             from_to: start_date
             separator: '-'
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -428,7 +428,7 @@ display:
             from_to: end_date
             separator: '-'
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -489,9 +489,9 @@ display:
           hide_alter_empty: true
           click_sort_column: target_id
           type: entity_reference_entity_id
-          settings: {  }
+          settings: {}
           group_column: target_id
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -552,9 +552,9 @@ display:
           hide_alter_empty: true
           click_sort_column: value
           type: basic_string
-          settings: {  }
+          settings: {}
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -627,7 +627,7 @@ display:
             image_loading:
               attribute: lazy
           group_column: target_id
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -694,7 +694,7 @@ display:
             image_loading:
               attribute: lazy
           group_column: target_id
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -761,7 +761,7 @@ display:
             rel: '0'
             target: '0'
           group_column: ''
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -825,7 +825,7 @@ display:
           settings:
             view_mode: default
           group_column: ''
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -865,11 +865,11 @@ display:
           sort_desc_label: Desc
       access:
         type: none
-        options: {  }
+        options: {}
       cache:
         type: tag
-        options: {  }
-      empty: {  }
+        options: {}
+      empty: {}
       sorts:
         date__value:
           id: date__value
@@ -887,7 +887,7 @@ display:
             field_identifier: date__value
           exposed: false
           granularity: minute
-      arguments: {  }
+      arguments: {}
       filters:
         status:
           id: status
@@ -934,7 +934,7 @@ display:
             use_operator: false
             operator: ''
             operator_limit_selection: false
-            operator_list: {  }
+            operator_list: {}
             identifier: ''
             required: false
             remember: false
@@ -954,12 +954,12 @@ display:
             multiple: false
             remember: false
             default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
+            default_group_multiple: {}
+            group_items: {}
       style:
         type: default
         options:
-          grouping: {  }
+          grouping: {}
           row_class: ''
           default_row_class: true
           uses_fields: false
@@ -967,7 +967,7 @@ display:
         type: fields
         options:
           default_field_elements: true
-          inline: {  }
+          inline: {}
           separator: ''
           hide_empty: false
       query:
@@ -977,7 +977,7 @@ display:
           disable_sql_rewrite: false
           distinct: false
           replica: false
-          query_tags: {  }
+          query_tags: {}
       relationships:
         uid:
           id: uid
@@ -990,9 +990,9 @@ display:
           entity_field: uid
           plugin_id: standard
           required: false
-      header: {  }
-      footer: {  }
-      display_extenders: {  }
+      header: {}
+      footer: {}
+      display_extenders: {}
     cache_metadata:
       max-age: -1
       contexts:
@@ -1077,7 +1077,7 @@ display:
                 keywords: ''
                 thumbnail: event_teaser_image
                 category: ''
-      display_extenders: {  }
+      display_extenders: {}
       path: redia-rss/event
     cache_metadata:
       max-age: -1

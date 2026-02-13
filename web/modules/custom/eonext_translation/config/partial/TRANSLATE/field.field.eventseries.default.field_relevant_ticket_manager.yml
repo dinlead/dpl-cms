@@ -14,8 +14,7 @@ description: 'If you mark this event as relevant, it means that if you use an ex
 required: false
 translatable: true
 default_value:
-  -
-    value: 1
+  - value: 1
 default_value_callback: ''
 settings:
   on_label: 'On'

@@ -6,10 +6,10 @@ dependencies:
     - paragraphs_ee
 third_party_settings:
   paragraphs_ee:
-    paragraphs_categories: {  }
+    paragraphs_categories: {}
 id: marketing_script
 label: 'Marketing script'
 icon_uuid: null
 icon_default: null
 description: ''
-behavior_plugins: {  }
+behavior_plugins: {}

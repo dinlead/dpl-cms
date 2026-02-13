@@ -19,11 +19,10 @@ description: ''
 required: false
 translatable: false
 default_value:
-  -
-    attributes: {  }
+  - attributes: {}
     uri: 'internal:/branches'
     title: ''
-    options: {  }
+    options: {}
 default_value_callback: ''
 settings:
   title: 2

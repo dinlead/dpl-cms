@@ -98,8 +98,8 @@ content:
   field_e_resource_lead:
     type: basic_string
     label: hidden
-    settings: {  }
-    third_party_settings: {  }
+    settings: {}
+    third_party_settings: {}
     weight: 4
     region: content
   field_e_resource_link:
@@ -111,7 +111,7 @@ content:
       url_plain: false
       rel: ''
       target: ''
-    third_party_settings: {  }
+    third_party_settings: {}
     weight: 6
     region: content
   field_e_resource_list_image:
@@ -122,12 +122,12 @@ content:
       image_style: e_resource_list
       image_loading:
         attribute: lazy
-    third_party_settings: {  }
+    third_party_settings: {}
     weight: 3
     region: content
   links:
-    settings: {  }
-    third_party_settings: {  }
+    settings: {}
+    third_party_settings: {}
     weight: 5
     region: content
 hidden:

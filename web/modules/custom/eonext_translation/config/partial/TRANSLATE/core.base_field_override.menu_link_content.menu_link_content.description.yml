@@ -12,7 +12,7 @@ label: Description
 description: 'Shown when hovering over the menu link.'
 required: false
 translatable: true
-default_value: {  }
+default_value: {}
 default_value_callback: ''
-settings: {  }
+settings: {}
 field_type: string

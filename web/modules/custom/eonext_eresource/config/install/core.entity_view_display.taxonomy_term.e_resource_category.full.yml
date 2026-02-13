@@ -17,11 +17,10 @@ third_party_settings:
     enabled: true
     allow_custom: true
     sections:
-      -
-        layout_id: layout_twocol_section
+      - layout_id: layout_twocol_section
         layout_settings:
           label: ''
-          context_mapping: {  }
+          context_mapping: {}
           column_widths: 25-75
         components:
           328df998-d00f-4819-9201-2a00cccb8f3c:
@@ -37,7 +36,7 @@ third_party_settings:
               views_label: ''
               items_per_page: none
             weight: 1
-            additional: {  }
+            additional: {}
           f464e14c-cd3c-4804-8af0-35e70dacca63:
             uuid: f464e14c-cd3c-4804-8af0-35e70dacca63
             region: first
@@ -46,9 +45,9 @@ third_party_settings:
               label: 'E-resource categories'
               label_display: '0'
               provider: eonext_eresource
-              context_mapping: {  }
+              context_mapping: {}
             weight: 0
-            additional: {  }
+            additional: {}
           67592ecf-a227-4eb2-8e87-18975f524d78:
             uuid: 67592ecf-a227-4eb2-8e87-18975f524d78
             region: second
@@ -62,8 +61,8 @@ third_party_settings:
               views_label: ''
               items_per_page: none
             weight: 0
-            additional: {  }
-        third_party_settings: {  }
+            additional: {}
+        third_party_settings: {}
 _core:
   default_config_hash: I-x8sNUrmKjo4bLxmVQk5QB59BUXJk-V9Gl96GQZLv0
 id: taxonomy_term.e_resource_category.full
@@ -74,8 +73,8 @@ content:
   description:
     type: text_default
     label: hidden
-    settings: {  }
-    third_party_settings: {  }
+    settings: {}
+    third_party_settings: {}
     weight: 0
     region: content
 hidden:

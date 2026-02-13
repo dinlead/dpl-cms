@@ -6,6 +6,7 @@ namespace Drupal\eonext_opening_hours\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Datetime\DrupalDateTime;
+use Safe\DateTime;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
@@ -79,6 +80,14 @@ final class PerBranchBlock extends BlockBase implements ContainerFactoryPluginIn
 
   /**
    * {@inheritdoc}
+   *
+   * @param array<string, mixed> $form
+   *   The form array.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
+   *
+   * @return array<string, mixed>
+   *   The form array.
    */
   public function blockForm($form, FormStateInterface $form_state): array {
 
@@ -104,6 +113,11 @@ final class PerBranchBlock extends BlockBase implements ContainerFactoryPluginIn
 
   /**
    * {@inheritdoc}
+   *
+   * @param array<string, mixed> $form
+   *   The form array.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form.
    */
   public function blockSubmit($form, FormStateInterface $form_state): void {
     $this->configuration['available_branches'] = array_filter($form_state->getValue('available_branches'));
@@ -111,6 +125,9 @@ final class PerBranchBlock extends BlockBase implements ContainerFactoryPluginIn
 
   /**
    * {@inheritdoc}
+   *
+   * @return array<string, mixed>
+   *   The render array.
    */
   public function build(): array {
 
@@ -141,6 +158,7 @@ final class PerBranchBlock extends BlockBase implements ContainerFactoryPluginIn
       }, $availableBranches);
     }
 
+    $items = [];
     foreach ($branches as $branch) {
       $items[] = $this->formatItem($branch);
     }
@@ -173,14 +191,14 @@ final class PerBranchBlock extends BlockBase implements ContainerFactoryPluginIn
    * @param \Drupal\node\NodeInterface $branch
    *   The branch node.
    *
-   * @return array|bool
+   * @return array<string, mixed>
    *   The formatted item.
    */
-  private function formatItem(NodeInterface $branch): array|bool {
+  private function formatItem(NodeInterface $branch): array {
 
     $openingHours = $this
       ->openingHoursRepository
-      ->loadMultiple([$branch->id()], new \DateTime(), new \DateTime());
+      ->loadMultiple([(int) $branch->id()], new DateTime(), new DateTime());
 
     // Order openingHours by startTime.
     usort($openingHours, function ($a, $b) {

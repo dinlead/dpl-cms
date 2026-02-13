@@ -83,7 +83,7 @@ display:
             thousand_separator: ''
             prefix_suffix: true
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -148,7 +148,7 @@ display:
           settings:
             link_to_entity: true
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -325,7 +325,7 @@ display:
               refresh: 60
               description: ''
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -392,7 +392,7 @@ display:
             format_custom_false: Unpublished
             format_custom_true: Published
           group_column: value
-          group_columns: {  }
+          group_columns: {}
           group_rows: true
           delta_limit: 0
           delta_offset: 0
@@ -487,10 +487,10 @@ display:
           perm: 'edit eventseries entity'
       cache:
         type: none
-        options: {  }
-      empty: {  }
-      sorts: {  }
-      arguments: {  }
+        options: {}
+      empty: {}
+      sorts: {}
+      arguments: {}
       filters:
         combine_1:
           id: combine_1
@@ -511,7 +511,7 @@ display:
             use_operator: false
             operator: combine_1_op
             operator_limit_selection: false
-            operator_list: {  }
+            operator_list: {}
             identifier: search
             required: false
             remember: false
@@ -536,8 +536,8 @@ display:
             multiple: false
             remember: false
             default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
+            default_group_multiple: {}
+            group_items: {}
           fields:
             id: id
             title: title
@@ -562,7 +562,7 @@ display:
             use_operator: false
             operator: status_op
             operator_limit_selection: false
-            operator_list: {  }
+            operator_list: {}
             identifier: status
             required: true
             remember: false
@@ -579,7 +579,7 @@ display:
             multiple: false
             remember: false
             default_group: All
-            default_group_multiple: {  }
+            default_group_multiple: {}
             group_items:
               1:
                 title: Published
@@ -598,7 +598,7 @@ display:
           admin_label: ''
           plugin_id: verf
           operator: in
-          value: {  }
+          value: {}
           group: 1
           exposed: true
           expose:
@@ -608,7 +608,7 @@ display:
             use_operator: false
             operator: field_categories_target_id_verf_op
             operator_limit_selection: false
-            operator_list: {  }
+            operator_list: {}
             identifier: categories
             required: false
             remember: false
@@ -633,8 +633,8 @@ display:
             multiple: false
             remember: false
             default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
+            default_group_multiple: {}
+            group_items: {}
           verf_target_bundles:
             categories: categories
             breadcrumb_structure: '0'
@@ -651,7 +651,7 @@ display:
           admin_label: ''
           plugin_id: taxonomy_index_tid
           operator: or
-          value: {  }
+          value: {}
           group: 1
           exposed: true
           expose:
@@ -661,7 +661,7 @@ display:
             use_operator: false
             operator: field_tags_target_id_op
             operator_limit_selection: false
-            operator_list: {  }
+            operator_list: {}
             identifier: tags
             required: false
             remember: false
@@ -686,8 +686,8 @@ display:
             multiple: false
             remember: false
             default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
+            default_group_multiple: {}
+            group_items: {}
           reduce_duplicates: false
           vid: tags
           type: textfield
@@ -703,7 +703,7 @@ display:
           admin_label: ''
           plugin_id: verf
           operator: in
-          value: {  }
+          value: {}
           group: 1
           exposed: true
           expose:
@@ -713,7 +713,7 @@ display:
             use_operator: false
             operator: field_branch_target_id_verf_op
             operator_limit_selection: false
-            operator_list: {  }
+            operator_list: {}
             identifier: branch
             required: false
             remember: false
@@ -738,8 +738,8 @@ display:
             multiple: false
             remember: false
             default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
+            default_group_multiple: {}
+            group_items: {}
           verf_target_bundles:
             branch: branch
             article: '0'
@@ -768,7 +768,7 @@ display:
             use_operator: false
             operator: ''
             operator_limit_selection: false
-            operator_list: {  }
+            operator_list: {}
             identifier: ''
             required: false
             remember: false
@@ -786,8 +786,8 @@ display:
             multiple: false
             remember: false
             default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
+            default_group_multiple: {}
+            group_items: {}
       filter_groups:
         operator: AND
         groups:
@@ -795,7 +795,7 @@ display:
       style:
         type: table
         options:
-          grouping: {  }
+          grouping: {}
           row_class: ''
           default_row_class: true
           columns:
@@ -868,12 +868,12 @@ display:
           disable_sql_rewrite: false
           distinct: false
           replica: false
-          query_tags: {  }
-      relationships: {  }
+          query_tags: {}
+      relationships: {}
       group_by: false
-      header: {  }
-      footer: {  }
-      display_extenders: {  }
+      header: {}
+      footer: {}
+      display_extenders: {}
     cache_metadata:
       max-age: -1
       contexts:
@@ -893,7 +893,7 @@ display:
     display_plugin: page
     position: 1
     display_options:
-      display_extenders: {  }
+      display_extenders: {}
       path: admin/content/eventseries
       menu:
         type: normal

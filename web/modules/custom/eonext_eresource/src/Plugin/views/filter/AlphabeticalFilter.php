@@ -2,7 +2,6 @@
 
 namespace Drupal\eonext_eresource\Plugin\views\filter;
 
-use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -118,15 +117,10 @@ class AlphabeticalFilter extends FilterPluginBase {
 
     if (!empty($selected_indexes)) {
       $index = reset($selected_indexes);
+      // @phpstan-ignore-next-line
       $this->query->addWhere(0, "{$table}.title", "{$index}%", 'LIKE');
     }
   }
 
-  /**
-   * {@inheritdoc}
-   */
-//  public function getCacheTags(): array {
-//    return Cache::mergeTags(['node_list:e_resource'], parent::getCacheTags());
-//  }
-
+  // @todo Re-enable cache tags when needed.
 }

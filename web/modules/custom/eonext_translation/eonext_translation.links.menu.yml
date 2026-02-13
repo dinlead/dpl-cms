@@ -17,4 +17,3 @@ eonext_translation.translation_translate_footer:
   route_name: eonext_translation.translate_footer
   parent: eonext_translation.settings
   weight: 2
-

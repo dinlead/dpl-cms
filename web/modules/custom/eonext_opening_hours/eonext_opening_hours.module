@@ -10,11 +10,14 @@ use Drupal\Core\Language\LanguageInterface;
 use Drupal\eonext_opening_hours\Plugin\Block\PerBranchBlock;
 use Drupal\node\NodeInterface;
 use Drupal\Core\Entity\ContentEntityInterface;
+use function Safe\date;
+use function Safe\json_encode;
+use function Safe\strtotime;
 
 /**
  * Implements hook_theme().
  */
-function eonext_opening_hours_theme() {
+function eonext_opening_hours_theme(): array {
   return [
     'eonext_opening_hours' => [
       'variables' => [
@@ -53,11 +56,12 @@ function eonext_opening_hours_preprocess_paragraph__eonext_opening_hours(array &
   }
 
   // Render the opening hours block here.
-  $block = \Drupal::service('plugin.manager.block')
+  /** @var \Drupal\Core\Block\BlockPluginInterface $blockPlugin */
+  $blockPlugin = \Drupal::service('plugin.manager.block')
     ->createInstance('eonext_opening_hours_per_branch', [
       'available_branches' => $available_branches,
-    ])
-    ->build();
+    ]);
+  $block = $blockPlugin->build();
 
   $variables['title'] = $variables['elements']['field_paragraph_title'];
   $variables['link'] = $variables['elements']['field_button_link'];
@@ -72,7 +76,7 @@ function eonext_opening_hours_preprocess_paragraph__eonext_opening_hours(array &
 /**
  * Implements hook_cron().
  */
-function eonext_opening_hours_cron() {
+function eonext_opening_hours_cron(): void {
 
   // Define the cron interval. Midnight.
   $next_midnight = strtotime('tomorrow');
@@ -103,7 +107,7 @@ function eonext_opening_hours_preprocess_html(array &$variables): void {
 /**
  * Implements hook_form_FORM_ID_alter() for the general settings form.
  */
-function eonext_opening_hours_form_dpl_library_agency_general_settings_alter(&$form, FormStateInterface $form_state, $form_id) {
+function eonext_opening_hours_form_dpl_library_agency_general_settings_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
   $config = \Drupal::config('eonext_opening_hours.branch_expansion');
 
   // Load local branch nodes.
@@ -113,10 +117,7 @@ function eonext_opening_hours_form_dpl_library_agency_general_settings_alter(&$f
 
   // Sort branches by title.
   usort($branchNodes, function ($a, $b) {
-    if ($a instanceof NodeInterface && $b instanceof NodeInterface) {
-      return strcmp($a->getTitle(), $b->getTitle());
-    }
-    return 0;
+    return strcmp($a->getTitle() ?? '', $b->getTitle() ?? '');
   });
 
   // Add expanded branches configuration to the form.
@@ -209,7 +210,8 @@ function eonext_opening_hours_preprocess_dpl_react_app(array &$variables): void 
       continue;
     }
 
-    // Skip if we've already processed this term (avoids duplicates from translations).
+    // Skip if we've already processed this term
+    // (avoids duplicates from translations).
     $termId = $term->id();
     if (in_array($termId, $processedTermIds)) {
       continue;

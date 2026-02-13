@@ -15,9 +15,11 @@ CONTAINER_NAME=$1
 DOMAIN=$2
 DOCKER_COMPOSE_FILES=${DOCKER_COMPOSE_FILES:-}
 
+# shellcheck disable=SC2086 # DOCKER_COMPOSE_FILES is intentionally word-split into multiple arguments.
 CONTAINER_ID=$(docker compose $DOCKER_COMPOSE_FILES ps "$CONTAINER_NAME" --quiet --no-trunc)
 [[ -z "$CONTAINER_ID" ]] && exit
 
+# shellcheck disable=SC2086
 IP_ADDRESS=$(docker inspect $DOCKER_COMPOSE_FILES "$CONTAINER_ID" --format '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}')
 [[ -z "$IP_ADDRESS" ]] && exit
 

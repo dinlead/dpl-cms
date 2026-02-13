@@ -24,14 +24,14 @@ content:
     type: options_select
     weight: 2
     region: content
-    settings: {  }
-    third_party_settings: {  }
+    settings: {}
+    third_party_settings: {}
   field_department:
     type: options_select
     weight: 3
     region: content
-    settings: {  }
-    third_party_settings: {  }
+    settings: {}
+    third_party_settings: {}
   field_email:
     type: email_default
     weight: 5
@@ -39,7 +39,7 @@ content:
     settings:
       placeholder: ''
       size: 60
-    third_party_settings: {  }
+    third_party_settings: {}
   field_forename:
     type: string_textfield
     weight: 0
@@ -47,21 +47,21 @@ content:
     settings:
       size: 60
       placeholder: ''
-    third_party_settings: {  }
+    third_party_settings: {}
   field_image:
     type: media_library_widget
     weight: 7
     region: content
     settings:
-      media_types: {  }
-    third_party_settings: {  }
+      media_types: {}
+    third_party_settings: {}
   field_phone:
     type: telephone_default
     weight: 6
     region: content
     settings:
       placeholder: ''
-    third_party_settings: {  }
+    third_party_settings: {}
   field_position:
     type: string_textfield
     weight: 4
@@ -69,7 +69,7 @@ content:
     settings:
       size: 60
       placeholder: ''
-    third_party_settings: {  }
+    third_party_settings: {}
   field_surname:
     type: string_textfield
     weight: 1
@@ -77,5 +77,5 @@ content:
     settings:
       size: 60
       placeholder: ''
-    third_party_settings: {  }
-hidden: {  }
+    third_party_settings: {}
+hidden: {}

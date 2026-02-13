@@ -5,7 +5,7 @@ services:
       - '@eonext.mobilesearch'
       - '@module_handler'
     tags:
-      - { name: 'event_subscriber'}
+      - { name: 'event_subscriber' }
   eonext.mobilesearch.converter_factory:
     class: Drupal\eonext_mobilesearch\Mobilesearch\EntityConverterFactory
   eonext.mobilesearch.node_converter:

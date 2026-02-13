@@ -5,6 +5,8 @@ namespace Drupal\eonext_translation\EventSubscriber;
 use Drupal\graphql\Event\OperationEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+use function Safe\preg_replace;
+
 /**
  * Event subscriber to clean language prefixes from GraphQL responses.
  */
@@ -25,10 +27,10 @@ class GraphQLResponseSubscriber implements EventSubscriberInterface {
    * @param \Drupal\graphql\Event\OperationEvent $event
    *   The GraphQL operation event.
    */
-  public function onGraphQlOperationAfter(OperationEvent $event) {
+  public function onGraphQlOperationAfter(OperationEvent $event): void {
     $result = $event->getResult();
 
-    if ($result && isset($result->data)) {
+    if ($result->data) {
       $this->cleanLanguagePrefixes($result->data);
     }
   }
@@ -39,7 +41,7 @@ class GraphQLResponseSubscriber implements EventSubscriberInterface {
    * @param mixed $data
    *   The data to clean.
    */
-  protected function cleanLanguagePrefixes(&$data) {
+  protected function cleanLanguagePrefixes(&$data): void {
     if (is_array($data)) {
       foreach ($data as $key => &$value) {
         if (($key === 'url' || $key === 'path') && is_string($value)) {
@@ -66,7 +68,7 @@ class GraphQLResponseSubscriber implements EventSubscriberInterface {
     }
   }
 
-    /**
+  /**
    * Remove language prefix from a URL.
    *
    * @param string $url

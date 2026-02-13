@@ -67,9 +67,7 @@ final class LibraryStaff extends ContentEntityBase implements LibraryStaffInterf
       ->setLabel(t('User'))
       ->setSetting('target_type', 'user')
       ->setSetting('handler', 'default:user')
-      ->setSetting('handler_settings', [
-
-      ])
+      ->setSetting('handler_settings', [])
       ->setCardinality(1)
       ->setDisplayConfigurable('form', FALSE)
       ->setDisplayConfigurable('view', FALSE);
@@ -77,8 +75,12 @@ final class LibraryStaff extends ContentEntityBase implements LibraryStaffInterf
     return $fields;
   }
 
-  public function setUserId(int $userId) {
+  /**
+   * {@inheritdoc}
+   */
+  public function setUserId(int $userId): static {
     $this->set('uid', $userId);
+    return $this;
   }
 
 }

@@ -61,19 +61,22 @@ function eonext_mobilesearch_entity_delete(EntityInterface $entity): void {
 /**
  * Implements hook_mobilesearch_push_alter().
  *
- * @param \Drupal\eonext_mobilesearch\Mobilesearch\DTO\NodeEntityDto $payload
+ * @param \Drupal\eonext_mobilesearch\Mobilesearch\DTO\MobilesearchEntityInterface $payload
+ *   The mobilesearch payload to alter.
  * @param \Drupal\Core\Entity\EntityInterface $entity
+ *   The entity being pushed.
  */
 function eonext_mobilesearch_mobilesearch_push_alter(MobilesearchEntityInterface $payload, EntityInterface $entity): void {
   if ($entity->getEntityTypeId() === 'eventinstance') {
-    $payload->setNid(20000000 + (int) $payload->getNid());
+    $payload->setNid((string) (20000000 + (int) $payload->getNid()));
   }
 
   $type = $payload->getType();
   $payload->setType(match($type) {
     'page' => 'ding_page',
     'article' => 'ding_news',
-    'default' => 'ding_event', // 'default' is the default bundle for events
+    // 'default' is the default bundle for events
+    'default' => 'ding_event',
     default => $type
   });
 
@@ -125,24 +128,13 @@ function eonext_mobilesearch_mobilesearch_push_alter(MobilesearchEntityInterface
   ];
 
   foreach ($fields_replacement_map as $field => $replacement) {
-    if (array_key_exists($field, $fields)) {
-      /** @var \Drupal\eonext_mobilesearch\Mobilesearch\DTO\FieldDto $dto_field */
-      $dto_field = $fields[$field];
-      unset($fields[$field]);
-      $fields[$replacement] = $dto_field;
+    if (array_key_exists($field, $taxonomy)) {
+      /** @var \Drupal\eonext_mobilesearch\Mobilesearch\DTO\TaxonomyDto $dto_field */
+      $dto_field = $taxonomy[$field];
+      unset($taxonomy[$field]);
+      $taxonomy[$replacement] = $dto_field;
     }
   }
-
-//  $removal_map = [
-//    'vid',
-//    'revision_timestamp', 'revision_log',
-//    'status', 'promote',
-//    'sticky', 'default_langcode',
-//    'revision_default', 'revision_translation_affected',
-//  ];
-//  foreach ($removal_map as $field) {
-//    unset($fields[$field]);
-//  }
 
   $payload->setTaxonomy($taxonomy);
 }

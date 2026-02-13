@@ -11,5 +11,13 @@ use Drupal\Core\Entity\EntityChangedInterface;
  * Provides an interface defining a library staff entity type.
  */
 interface LibraryStaffInterface extends ContentEntityInterface, EntityChangedInterface {
-  public function setUserId(int $userId);
+
+  /**
+   * Sets the user ID for this staff entity.
+   *
+   * @param int $userId
+   *   The user ID to set.
+   */
+  public function setUserId(int $userId): static;
+
 }

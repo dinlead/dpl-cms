@@ -8,7 +8,7 @@
 /**
  * Implements hook_theme().
  */
-function eonext_branch_opening_hours_theme($existing, $type, $theme, $path) {
+function eonext_branch_opening_hours_theme(array $existing, string $type, string $theme, string $path): array {
   return [
     'html__node__opening_hours_bare' => [
       'base hook' => 'html',
@@ -23,6 +23,9 @@ function eonext_branch_opening_hours_theme($existing, $type, $theme, $path) {
  * Implements hook_theme_suggestions_HOOK().
  *
  * Provide a bare html theme suggestion.
+ *
+ * @return array<string>
+ *   An array of theme suggestions.
  */
 function eonext_branch_opening_hours_theme_suggestions_html(array $variables): array {
   $suggestions = [];
@@ -38,6 +41,9 @@ function eonext_branch_opening_hours_theme_suggestions_html(array $variables): a
  * Implements hook_theme_suggestions_HOOK().
  *
  * Provide a bare page theme suggestion.
+ *
+ * @return array<string>
+ *   An array of theme suggestions.
  */
 function eonext_branch_opening_hours_theme_suggestions_page(array $variables): array {
   $suggestions = [];

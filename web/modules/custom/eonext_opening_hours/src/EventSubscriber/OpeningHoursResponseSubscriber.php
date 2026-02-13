@@ -12,6 +12,8 @@ use Drupal\Core\Language\LanguageManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use function Safe\json_decode;
+use function Safe\json_encode;
 
 /**
  * Event subscriber to translate opening hours categories in API responses.

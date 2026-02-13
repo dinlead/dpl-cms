@@ -2,17 +2,18 @@
 
 /**
  * @file
- */
-
-use Drupal\eonext_ext_fields\Form\AdditionalFieldsSettingsForm;
-
-/**
- * @file
  * Extended fields module logic.
  */
 
+use Drupal\eonext_ext_fields\Form\AdditionalFieldsSettingsForm;
+use function Safe\json_decode;
+use function Safe\preg_replace;
+
 /**
+ * Preprocesses DPL react app variables with extended field data.
  *
+ * @param array $variables
+ *   Theme hook variables.
  */
 function eonext_ext_fields_preprocess_dpl_react_app(array &$variables): void {
   $additional_fields_config = \Drupal::service('config.factory')
@@ -73,6 +74,7 @@ function eonext_ext_fields_dpl_react_apps_data(array &$data): void {
     // Transform CamelCase to kebab-case. And remove Text suffix.
     $keyAttribute = strtolower(preg_replace('/(?<!^)[A-Z]/', '-$0', $key));
     $keyAttribute = str_replace('-text', '', $keyAttribute);
+    // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
     $data['texts'][$keyAttribute] = t($value);
   }
 }

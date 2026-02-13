@@ -5,6 +5,7 @@ namespace Drupal\eonext_opening_hours\Cache\Context;
 use Drupal\Core\Cache\Context\CacheContextInterface;
 use Drupal\Component\Datetime\TimeInterface;
 use Drupal\Core\Cache\CacheableMetadata;
+use function Safe\date;
 
 /**
  * Defines a cache context based on the current date (YYYY-MM-DD).

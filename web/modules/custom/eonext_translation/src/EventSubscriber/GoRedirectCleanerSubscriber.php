@@ -7,6 +7,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
+use function Safe\preg_match;
+use function Safe\preg_replace;
+
 /**
  * Event subscriber to clean language prefixes from GO redirects.
  */
@@ -35,7 +38,7 @@ class GoRedirectCleanerSubscriber implements EventSubscriberInterface {
    * @param \Symfony\Component\HttpKernel\Event\ResponseEvent $event
    *   The response event.
    */
-  public function cleanRedirectResponse(ResponseEvent $event) {
+  public function cleanRedirectResponse(ResponseEvent $event): void {
     $response = $event->getResponse();
 
     // Only process redirect responses.

@@ -17,11 +17,11 @@ label: Files
 description: ''
 required: false
 translatable: false
-default_value: {  }
+default_value: {}
 default_value_callback: ''
 settings:
   handler: 'default:file'
-  handler_settings: {  }
+  handler_settings: {}
   file_directory: files/eresource
   file_extensions: 'jpg jpeg gif png txt doc docx xls xlsx pdf ppt pptx pps odt ods odp'
   max_filesize: ''

@@ -6,7 +6,7 @@ dependencies:
     - field.storage.paragraph.field_available_branches
     - node.type.branch
     - paragraphs.paragraphs_type.eonext_opening_hours
-  module:
+  module: []
   enforced:
     module:
       - eonext_opening_hours
@@ -18,7 +18,7 @@ label: 'Available Branches'
 description: ''
 required: false
 translatable: false
-default_value: {  }
+default_value: {}
 default_value_callback: ''
 settings:
   handler: 'default:node'

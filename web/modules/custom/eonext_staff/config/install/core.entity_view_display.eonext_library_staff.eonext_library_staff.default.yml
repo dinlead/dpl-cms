@@ -23,7 +23,7 @@ content:
     label: above
     settings:
       link: true
-    third_party_settings: {  }
+    third_party_settings: {}
     weight: 2
     region: content
   field_department:
@@ -31,14 +31,14 @@ content:
     label: above
     settings:
       link: true
-    third_party_settings: {  }
+    third_party_settings: {}
     weight: 3
     region: content
   field_email:
     type: basic_string
     label: above
-    settings: {  }
-    third_party_settings: {  }
+    settings: {}
+    third_party_settings: {}
     weight: 5
     region: content
   field_forename:
@@ -46,7 +46,7 @@ content:
     label: above
     settings:
       link_to_entity: false
-    third_party_settings: {  }
+    third_party_settings: {}
     weight: 0
     region: content
   field_image:
@@ -55,14 +55,14 @@ content:
     settings:
       view_mode: default
       link: false
-    third_party_settings: {  }
+    third_party_settings: {}
     weight: 7
     region: content
   field_phone:
     type: basic_string
     label: above
-    settings: {  }
-    third_party_settings: {  }
+    settings: {}
+    third_party_settings: {}
     weight: 6
     region: content
   field_position:
@@ -70,7 +70,7 @@ content:
     label: above
     settings:
       link_to_entity: false
-    third_party_settings: {  }
+    third_party_settings: {}
     weight: 4
     region: content
   field_surname:
@@ -78,7 +78,7 @@ content:
     label: above
     settings:
       link_to_entity: false
-    third_party_settings: {  }
+    third_party_settings: {}
     weight: 1
     region: content
 hidden:

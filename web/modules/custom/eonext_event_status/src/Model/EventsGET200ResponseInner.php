@@ -11,16 +11,18 @@ class EventsGET200ResponseInner extends EventsGET200ResponseInnerDefault {
 
   /**
    * The event ribbon information.
+   *
+   * @var array<string, mixed>|null
    */
   protected ?array $ribbon = NULL;
 
   /**
    * Constructor.
    *
-   * @param array|null $data
+   * @param array<string, mixed>|null $data
    *   Associated array of property values initializing the model.
    */
-  public function __construct(array $data = NULL) {
+  public function __construct(?array $data = NULL) {
     parent::__construct($data);
     if (is_array($data)) {
       $this->ribbon = array_key_exists('ribbon', $data) ? $data['ribbon'] : $this->ribbon;

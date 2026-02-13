@@ -8,12 +8,15 @@
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
 
+use function Safe\json_decode;
+use function Safe\json_encode;
+
 /**
  * Implements hook_form_FORM_ID_alter().
  *
  * Alters the DPL Library Agency general settings form to add branch ordering.
  */
-function eonext_branch_ordering_form_dpl_library_agency_general_settings_alter(&$form, FormStateInterface $form_state, $form_id) {
+function eonext_branch_ordering_form_dpl_library_agency_general_settings_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
   $config = \Drupal::config('eonext_branch_ordering.settings');
 
   // Get the branch repository to load all branches.
@@ -140,8 +143,13 @@ function eonext_branch_ordering_form_dpl_library_agency_general_settings_alter(&
 
 /**
  * Custom validation handler for branch ordering configuration.
+ *
+ * @param array<string, mixed> $form
+ *   The form array.
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ *   The form state.
  */
-function eonext_branch_ordering_form_validate(array &$form, FormStateInterface $form_state) {
+function eonext_branch_ordering_form_validate(array &$form, FormStateInterface $form_state): void {
   // No specific validation needed for draggable table.
   // Drupal handles weight validation.
 }
@@ -149,7 +157,7 @@ function eonext_branch_ordering_form_validate(array &$form, FormStateInterface $
 /**
  * Custom submit handler for branch ordering configuration.
  */
-function eonext_branch_ordering_form_submit(array &$form, FormStateInterface $form_state) {
+function eonext_branch_ordering_form_submit(array &$form, FormStateInterface $form_state): void {
   $branch_order_table = $form_state->getValue('branch_order_table');
 
   if ($branch_order_table) {

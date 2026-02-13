@@ -15,8 +15,14 @@ use Drupal\eonext_translation\Form\TranslationSettingsForm;
 use Drupal\eonext_translation\TranslationService;
 use Drupal\node\NodeInterface;
 
+use function Safe\json_decode;
+use function Safe\json_encode;
+
 /**
  * Implements hook_page_attachments().
+ *
+ * @param array<string, mixed> $attachments
+ *   An array of page attachments.
  */
 function eonext_translation_page_attachments(array &$attachments): void {
   $config = \Drupal::config('eonext_translation.settings');
@@ -77,7 +83,7 @@ function eonext_translation_preprocess_html(array &$variables): void {
       $branch_node = $current_node;
     }
 
-    TranslationService::addBranchAttributes($variables, $branch_node);
+    TranslationService::addBranchAttributes($variables, $branch_node instanceof NodeInterface ? $branch_node : NULL);
   }
   else {
     TranslationService::addBranchAttributes($variables);
@@ -88,7 +94,7 @@ function eonext_translation_preprocess_html(array &$variables): void {
 /**
  * Implements hook_form_alter().
  */
-function eonext_translation_form_alter(array &$form, FormStateInterface $form_state, $form_id): void {
+function eonext_translation_form_alter(array &$form, FormStateInterface $form_state, string $form_id): void {
   if ($form_id === 'dpl_footer_form') {
     // Add a new submit handler to the footer form.
     $form['#submit'][] = 'eonext_translation_footer_form_submit';
@@ -135,7 +141,7 @@ function eonext_translation_preprocess_dpl_react_app(array &$variables): void {
 /**
  * Fixes branch configuration links to use the correct language.
  *
- * @param array &$variables
+ * @param array<string, mixed> $variables
  *   The variables array from the preprocess function.
  * @param \Drupal\Core\Language\LanguageInterface $current_language
  *   The current language.
@@ -181,7 +187,7 @@ function _eonext_translation_fix_branches_config(array &$variables, LanguageInte
  *   The URL to process.
  * @param string $language_prefix
  *   The language prefix to add.
- * @param array $languages
+ * @param array<string, mixed> $languages
  *   Array of available languages.
  *
  * @return string
@@ -267,10 +273,11 @@ function eonext_translation_preprocess_page(array &$variables): void {
 /**
  * Implements hook_preprocess_field().
  */
-function eonext_translation_preprocess_field(&$variables) {
+function eonext_translation_preprocess_field(array &$variables): void {
   if ($variables['field_type'] === 'address') {
     $country = $variables['items'][0]['content']['country']['#value'] ?? '';
     if ($country) {
+      // phpcs:ignore Drupal.Semantics.FunctionT.NotLiteralString
       $variables['items'][0]['content']['country']['#value'] = t($country);
     }
   }
@@ -278,8 +285,13 @@ function eonext_translation_preprocess_field(&$variables) {
 
 /**
  * Implements hook_entity_base_field_info_alter().
+ *
+ * @param array<string, mixed> $fields
+ *   The array of base field definitions.
+ * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type
+ *   The entity type definition.
  */
-function eonext_translation_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
+function eonext_translation_entity_base_field_info_alter(array &$fields, EntityTypeInterface $entity_type): void {
   // Set add the langcode field to the hidden region for event series.
   if ($entity_type->id() == 'eventseries' && !empty($fields['langcode'])) {
     $fields['langcode']->setDisplayOptions('form', ['region' => 'hidden']);
@@ -289,7 +301,7 @@ function eonext_translation_entity_base_field_info_alter(&$fields, EntityTypeInt
 /**
  * Implements hook_entity_update().
  */
-function eonext_translation_entity_update(EntityInterface $entity) {
+function eonext_translation_entity_update(EntityInterface $entity): void {
 
   if ($entity->getEntityTypeId() === 'eventseries') {
 
@@ -302,7 +314,7 @@ function eonext_translation_entity_update(EntityInterface $entity) {
 
     // Create the translation of the event instances.
     foreach ($eventInstances as $eventInstance) {
-      if (!$eventInstance->hasTranslation($entityLanguage)) {
+      if ($eventInstance instanceof ContentEntityBase && !$eventInstance->hasTranslation($entityLanguage)) {
         $translation = $eventInstance->addTranslation($entityLanguage);
         // Set the series ID and save.
         $translation->set('eventseries_id', $entity->id());

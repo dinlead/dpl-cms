@@ -8,11 +8,11 @@ id: eventseries.field_ribbon_instances_apply
 field_name: field_ribbon_instances_apply
 entity_type: eventseries
 type: boolean
-settings: {  }
+settings: {}
 module: core
 locked: false
 cardinality: 1
 translatable: true
-indexes: {  }
+indexes: {}
 persist_with_no_fields: false
 custom_storage: false

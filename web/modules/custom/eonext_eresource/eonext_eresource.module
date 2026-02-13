@@ -10,7 +10,7 @@ use Drupal\Core\Render\Element;
 /**
  * Implements hook_views_data_alter().
  *
- * @param array $data
+ * @param array<string, mixed> $data
  *   Existing implementations.
  */
 function eonext_eresource_views_data_alter(array &$data): void {
@@ -68,6 +68,12 @@ function eonext_eresource_theme(): array {
   ];
 }
 
+/**
+ * Preprocesses variables for the e-resource full node template.
+ *
+ * @param array $variables
+ *   Theme hook variables.
+ */
 function template_preprocess_node__e_resource__full(&$variables): void {
   template_preprocess_node($variables);
 
@@ -85,31 +91,7 @@ function template_preprocess_node__e_resource__full(&$variables): void {
 
   $variables['title_attributes']['class'][] = 'title';
 
-  // @todo: Somehow figure out how to generate e-resource overview link.
-//  $overview_link = $variables['node']->toLink()->toRenderable();
-//  $overview_link['#title'] = t('E-resources & media');
-//  $overview_link['#attributes']['class'][] = 'link-tag';
-//
-//  $variables['e_resources_link'] = [
-//    '#type' => 'html_tag',
-//    '#tag' => 'div',
-//    '#attributes' => [
-//      'class' => [
-//        'views-field',
-//        'views-field-see-more'
-//      ],
-//    ],
-//    'child' => [
-//      '#type' => 'html_tag',
-//      '#tag' => 'div',
-//      '#attributes' => [
-//        'class' => [
-//          'field-content',
-//        ],
-//      ],
-//      'child' => $overview_link,
-//    ],
-//  ];
+  // @todo Somehow figure out how to generate e-resource overview link.
 }
 
 /**
@@ -137,7 +119,10 @@ function eonext_eresource_theme_suggestions_views_view_unformatted_alter(array &
 }
 
 /**
+ * Preprocesses the e-resource link view field.
  *
+ * @param array $variables
+ *   Theme hook variables.
  */
 function eonext_eresource_preprocess_views_view_field__field_e_resource_link(array &$variables): void {
 
@@ -172,15 +157,16 @@ function eonext_eresource_preprocess_views_view_field__field_e_resource_link(arr
  *   2 => 'views_view_fields__e_resource_list__block',
  *   3 => 'views_view_fields__block',
  *   4 => 'views_view_fields__e_resource_list',
- *   5 => 'views_view_fields',
- *
- * @see eonext_eresource_theme()
- * @see template_preprocess_views_view_fields__e_resource_list__block()
+ *   5 => 'views_view_fields'.
  *
  * @param array $variables
  *   Theme hook variables.
+ *
+ * @see eonext_eresource_theme()
+ * @see template_preprocess_views_view_fields__e_resource_list__block()
  */
 function template_preprocess_views_view_fields__e_resource_list__eresource_category(array &$variables): void {
+  /** @phpstan-ignore-next-line */
   template_preprocess_views_view_fields($variables);
 }
 
@@ -190,12 +176,13 @@ function template_preprocess_views_view_fields__e_resource_list__eresource_categ
  * Prepare variable for the list display, which is the
  * block display of the view.
  *
- * @see eonext_eresource_theme()
- *
  * @param array $variables
  *   Theme hook variables.
+ *
+ * @see eonext_eresource_theme()
  */
 function template_preprocess_views_view_fields__e_resource_list__block(array &$variables): void {
+  /** @phpstan-ignore-next-line */
   template_preprocess_views_view_fields($variables);
 
   foreach ($variables['fields'] as $field_name => $field) {

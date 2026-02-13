@@ -9,6 +9,17 @@ class NodeEntityDto implements MobilesearchEntityInterface {
 
   /**
    * DTO constructor.
+   *
+   * @param string $nid
+   *   Node ID.
+   * @param string $agency
+   *   Agency ID.
+   * @param string $type
+   *   Content type.
+   * @param array<int|string, FieldDto> $fields
+   *   Node fields.
+   * @param array<int|string, TaxonomyDto> $taxonomy
+   *   Taxonomy terms.
    */
   public function __construct(
     protected string $nid,
@@ -34,10 +45,10 @@ class NodeEntityDto implements MobilesearchEntityInterface {
    * @param string $nid
    *   Node id.
    *
-   * @return self
+   * @return static
    *   DTO object.
    */
-  public function setNid(string $nid): self {
+  public function setNid(string $nid): static {
     $this->nid = $nid;
 
     return $this;
@@ -69,14 +80,20 @@ class NodeEntityDto implements MobilesearchEntityInterface {
   }
 
   /**
+   * Gets the node content type.
    *
+   * @return string
+   *   The content type.
    */
   public function getType(): string {
     return $this->type;
   }
 
   /**
+   * Sets the node content type.
    *
+   * @param string $type
+   *   The content type.
    */
   public function setType(string $type): void {
     $this->type = $type;
@@ -85,7 +102,7 @@ class NodeEntityDto implements MobilesearchEntityInterface {
   /**
    * Gets node fields.
    *
-   * @return array
+   * @return array<int|string, FieldDto>
    *   Node fields DTO array.
    */
   public function getFields(): array {
@@ -95,23 +112,38 @@ class NodeEntityDto implements MobilesearchEntityInterface {
   /**
    * Sets node fields.
    *
-   * @param array $fields
+   * @param array<int|string, FieldDto> $fields
    *   Node fields DTO array.
    *
-   * @return self
+   * @return static
    *   DTO object.
    */
-  public function setFields(array $fields): self {
+  public function setFields(array $fields): static {
     $this->fields = $fields;
 
     return $this;
   }
 
+  /**
+   * Gets the taxonomy terms.
+   *
+   * @return array<int|string, TaxonomyDto>
+   *   Taxonomy DTO array.
+   */
   public function getTaxonomy(): array {
     return $this->taxonomy;
   }
 
-  public function setTaxonomy(array $taxonomy): self {
+  /**
+   * Sets the taxonomy terms.
+   *
+   * @param array<int|string, TaxonomyDto> $taxonomy
+   *   Taxonomy DTO array.
+   *
+   * @return static
+   *   DTO object.
+   */
+  public function setTaxonomy(array $taxonomy): static {
     $this->taxonomy = $taxonomy;
 
     return $this;
@@ -119,6 +151,9 @@ class NodeEntityDto implements MobilesearchEntityInterface {
 
   /**
    * {@inheritDoc}
+   *
+   * @return array<string, mixed>
+   *   The serialized node entity data.
    */
   public function jsonSerialize(): array {
     return [
@@ -134,7 +169,7 @@ class NodeEntityDto implements MobilesearchEntityInterface {
    * {@inheritDoc}
    */
   public function getId(): int {
-    return $this->getNid();
+    return (int) $this->getNid();
   }
 
   /**

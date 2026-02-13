@@ -10,7 +10,7 @@ use Drupal\eonext_bibdk_sh\Form\BibdkSettingsForm;
 /**
  * Implements hook_cron().
  */
-function eonext_bibdk_sh_cron() {
+function eonext_bibdk_sh_cron(): void {
   $request_time = \Drupal::time()->getCurrentTime();
 
   $config = \Drupal::configFactory()->get(BibdkSettingsForm::CONFIG_ID);

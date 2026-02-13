@@ -16,4 +16,4 @@ label: 'EO Next Opening hours'
 icon_uuid: null
 icon_default: null
 description: 'This is a paragraph for displaying the opening hours for all branches.'
-behavior_plugins: {  }
+behavior_plugins: {}

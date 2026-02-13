@@ -7,77 +7,83 @@
 
 /**
  * Implements hook_views_rss_namespaces().
+ *
+ * @return array<string, array<string, string>>
+ *   The namespaces array.
  */
 function eonext_redia_rss_views_rss_namespaces(): array {
-  $namespaces['content-rss'] = array(
+  $namespaces['content-rss'] = [
     'prefix' => 'xmlns',
     'uri' => 'http://xml.redia.dk/rss',
-  );
+  ];
 
   return $namespaces;
 }
 
 /**
  * Implements hook_views_rss_item_elements().
+ *
+ * @return array<string, array<string, mixed>>
+ *   The item elements array.
  */
 function eonext_redia_rss_views_rss_item_elements(): array {
-  return array(
-    'content-rss:subheadline' => array(
+  return [
+    'content-rss:subheadline' => [
       'title' => t('Subheadline'),
       'description' => t('The subheadline'),
-    ),
-    'content-rss:arrangement-starttime' => array(
+    ],
+    'content-rss:arrangement-starttime' => [
       'title' => t('Event starttime'),
       'description' => t('When does the event start (UTC Timestamp)'),
-    ),
-    'content-rss:arrangement-endtime' => array(
+    ],
+    'content-rss:arrangement-endtime' => [
       'title' => t('Event endtime'),
       'description' => t('When does the event end (UTC Timestamp)'),
-    ),
-    'content-rss:display-starttime' => array(
+    ],
+    'content-rss:display-starttime' => [
       'title' => t('Display starttime'),
       'description' => t('Start displaying the event at (UTC Timestamp)'),
-    ),
-    'content-rss:display-endtime' => array(
+    ],
+    'content-rss:display-endtime' => [
       'title' => t('Display endtime'),
       'description' => t('End displaying the event at (UTC Timestamp)'),
-    ),
-    'content-rss:arrangement-location' => array(
+    ],
+    'content-rss:arrangement-location' => [
       'title' => t('Event location'),
       'description' => t('The location of the event'),
-    ),
-    'content-rss:arrangement-price' => array(
+    ],
+    'content-rss:arrangement-price' => [
       'title' => t('Event price'),
       'description' => t('The price of the event.'),
-    ),
-    'content-rss:resources' => array(
+    ],
+    'content-rss:resources' => [
       'title' => t('Redia resources'),
       'description' => t('The node id of a type which has a relation to ting objects.'),
-      'preprocess functions' => array('ding_app_content_rss_preprocess_item_resources'),
-    ),
-    'content-rss:library-id' => array(
+      'preprocess functions' => ['ding_app_content_rss_preprocess_item_resources'],
+    ],
+    'content-rss:library-id' => [
       'title' => t('Library ID'),
       'description' => t('Identificator of library to which this node is assigned.'),
-    ),
-    'content-rss:booking-url' => array(
+    ],
+    'content-rss:booking-url' => [
       'title' => t('Booking URL'),
       'description' => t('Link to tickets.'),
-    ),
-    'content-rss:promoted' => array(
+    ],
+    'content-rss:promoted' => [
       'title' => t('Promoted to front page'),
       'description' => t('Boolean value for promoted to front page.'),
-    ),
-    'content-rss:sticky' => array(
+    ],
+    'content-rss:sticky' => [
       'title' => t('Sticky'),
       'description' => t('Boolean value for sticky.'),
-    ),
-    'content-rss:place_room' => array(
+    ],
+    'content-rss:place_room' => [
       'title' => t('Place/Room'),
       'description' => t('Use this to direct your guests to the correct place'),
-    ),
-    'content-rss:organizers' => array(
+    ],
+    'content-rss:organizers' => [
       'title' => t('Organizers'),
       'description' => t('One or more organizers of the event.'),
-    ),
-  );
+    ],
+  ];
 }

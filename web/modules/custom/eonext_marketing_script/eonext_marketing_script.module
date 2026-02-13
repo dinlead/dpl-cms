@@ -10,7 +10,7 @@ use Drupal\Core\Render\Markup;
 /**
  * Implements hook_theme().
  */
-function eonext_marketing_script_theme($existing, $type, $theme, $path) {
+function eonext_marketing_script_theme(array $existing, string $type, string $theme, string $path): array {
   return [
     'paragraph__marketing_script' => [
       'template' => 'paragraph--marketing-script',
@@ -24,7 +24,7 @@ function eonext_marketing_script_theme($existing, $type, $theme, $path) {
  *
  * Replaces marketing_script paragraph content with the marketing form.
  */
-function eonext_marketing_script_preprocess_paragraph(&$variables) {
+function eonext_marketing_script_preprocess_paragraph(array &$variables): void {
   $paragraph = $variables['paragraph'];
 
   if ($paragraph->bundle() === 'marketing_script') {

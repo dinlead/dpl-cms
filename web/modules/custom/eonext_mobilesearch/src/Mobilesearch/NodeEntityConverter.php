@@ -14,19 +14,30 @@ use Drupal\eonext_mobilesearch\Mobilesearch\DTO\FieldDto;
 use Drupal\eonext_mobilesearch\Mobilesearch\DTO\NodeEntityDto;
 use Drupal\eonext_mobilesearch\Mobilesearch\DTO\TaxonomyDto;
 use Drupal\node\NodeInterface;
+use Safe\DateTime;
+use function Safe\file_get_contents;
 
 /**
  * Converts a node entity into a serializable object.
  */
 class NodeEntityConverter extends AbstractEntityConverter {
 
+  /**
+   * The agency ID for mobilesearch communication.
+   *
+   * @var string
+   */
   protected string $agencyId;
 
   /**
    * Converter constructor.
    *
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entityTypeManager
+   *   The entity type manager service.
    * @param \Drupal\Core\Entity\EntityFieldManagerInterface $entityFieldManager
+   *   The entity field manager service.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   The config factory service.
    */
   public function __construct(
     protected EntityTypeManagerInterface $entityTypeManager,
@@ -40,10 +51,7 @@ class NodeEntityConverter extends AbstractEntityConverter {
    * {@inheritDoc}
    */
   public function convert(EntityInterface $entity): NodeEntityDto {
-//    if (!$entity instanceof NodeInterface) {
-//      throw new \RuntimeException('Only node entities can be used in this context.');
-//    }
-
+    assert($entity instanceof NodeInterface);
     $fieldDefinitions = $this->entityFieldManager->getFieldDefinitions(
       $entity->getEntityTypeId(),
       $entity->getType()
@@ -100,7 +108,7 @@ class NodeEntityConverter extends AbstractEntityConverter {
     }
 
     return new NodeEntityDto(
-      $entity->id(),
+      (string) $entity->id(),
       $this->agencyId ?? '000000',
       $entity->getType(),
       $fields,
@@ -117,14 +125,14 @@ class NodeEntityConverter extends AbstractEntityConverter {
    *   Field name, whose value(s) to resolve.
    * @param \Drupal\Core\Field\FieldDefinitionInterface $fieldDefinition
    *   Field definition.
-   * @param array $fields
+   * @param array<string, mixed> $fields
    *   Target collection where resolved values are inserted.
    */
   protected function resolveField(FieldableEntityInterface $node, string $fieldName, FieldDefinitionInterface $fieldDefinition, array &$fields): void {
     $mainProperty = $fieldDefinition->getFieldStorageDefinition()->getMainPropertyName();
 
     $fields[$fieldName] = new FieldDto(
-      $fieldDefinition->getLabel(),
+      (string) $fieldDefinition->getLabel(),
       $node->get($fieldName)->{$mainProperty} ?? ''
     );
   }
@@ -138,7 +146,7 @@ class NodeEntityConverter extends AbstractEntityConverter {
    *   Field name, whose value(s) to resolve.
    * @param \Drupal\Core\Field\FieldDefinitionInterface $fieldDefinition
    *   Field definition.
-   * @param array $taxonomy
+   * @param array<string, mixed> $taxonomy
    *   Target collection where resolved values are inserted.
    */
   protected function resolveTaxonomyTerms(FieldableEntityInterface $node, string $fieldName, FieldDefinitionInterface $fieldDefinition, array &$taxonomy): void {
@@ -150,13 +158,14 @@ class NodeEntityConverter extends AbstractEntityConverter {
 
     $terms = [];
     foreach ($node->get($fieldName) as $item) {
+      // @phpstan-ignore-next-line
       if ($item->entity) {
         $terms[] = $item->entity->label();
       }
     }
 
     $taxonomy[$fieldName] = new TaxonomyDto(
-      $fieldDefinition->getLabel(),
+      (string) $fieldDefinition->getLabel(),
       $terms
     );
   }
@@ -170,14 +179,15 @@ class NodeEntityConverter extends AbstractEntityConverter {
    *   Field name, whose value(s) to resolve.
    * @param \Drupal\Core\Field\FieldDefinitionInterface $fieldDefinition
    *   Field definition.
-   * @param array $fields
+   * @param array<string, mixed> $fields
    *   Target collection where resolved values are inserted.
    */
   protected function resolveImage(FieldableEntityInterface $node, string $fieldName, FieldDefinitionInterface $fieldDefinition, array &$fields): void {
     $image_data = [];
     $image_mime = [];
     foreach ($node->get($fieldName) as $item) {
-      /** @var \Drupal\file\Entity\File $image */
+      /** @var \Drupal\file\Entity\File|null $image */
+      // @phpstan-ignore-next-line
       $image = $item->entity;
       if (!$image || !is_readable($image->get('uri')->value)) {
         // @todo Log this.
@@ -188,7 +198,7 @@ class NodeEntityConverter extends AbstractEntityConverter {
     }
 
     $fields[$fieldName] = new FieldDto(
-      $fieldDefinition->getLabel(),
+      (string) $fieldDefinition->getLabel(),
       $image_data,
       $image_mime
     );
@@ -203,7 +213,7 @@ class NodeEntityConverter extends AbstractEntityConverter {
    *   Field name, whose value(s) to resolve.
    * @param \Drupal\Core\Field\FieldDefinitionInterface $fieldDefinition
    *   Field definition.
-   * @param array $fields
+   * @param array<string, mixed> $fields
    *   Target collection where resolved values are inserted.
    */
   protected function resolveDate(FieldableEntityInterface $node, string $fieldName, FieldDefinitionInterface $fieldDefinition, array &$fields): void {
@@ -211,9 +221,9 @@ class NodeEntityConverter extends AbstractEntityConverter {
     $value = $node->get($fieldName)->{$mainProperty} ?? '';
 
     if ($value) {
-      $value = (new \DateTime())->setTimestamp($value)->format(DATE_ATOM);
+      $value = (new DateTime())->setTimestamp($value)->format(DATE_ATOM);
       $fields[$fieldName] = new FieldDto(
-        $fieldDefinition->getLabel(),
+        (string) $fieldDefinition->getLabel(),
         $value
       );
     }
@@ -228,7 +238,7 @@ class NodeEntityConverter extends AbstractEntityConverter {
    *   Field name, whose value(s) to resolve.
    * @param \Drupal\Core\Field\FieldDefinitionInterface $fieldDefinition
    *   Field definition.
-   * @param array $fields
+   * @param array<string, mixed> $fields
    *   Target collection where resolved values are inserted.
    */
   protected function resolveLength(FieldableEntityInterface $node, string $fieldName, FieldDefinitionInterface $fieldDefinition, array &$fields): void {
@@ -236,7 +246,7 @@ class NodeEntityConverter extends AbstractEntityConverter {
 
     if (NULL !== $length) {
       $fields[$fieldName] = new FieldDto(
-        $fieldDefinition->getLabel(),
+        (string) $fieldDefinition->getLabel(),
         (int) ($length / 60)
       );
     }
@@ -251,20 +261,20 @@ class NodeEntityConverter extends AbstractEntityConverter {
    *   Field name, whose value(s) to resolve.
    * @param \Drupal\Core\Field\FieldDefinitionInterface $fieldDefinition
    *   Field definition.
-   * @param array $fields
+   * @param array<string, mixed> $fields
    *   Target collection where resolved values are inserted.
    */
-  protected function resolveUrl(FieldableEntityInterface $node, string $fieldName, FieldDefinitionInterface $fieldDefinition, array &$fields) {
+  protected function resolveUrl(FieldableEntityInterface $node, string $fieldName, FieldDefinitionInterface $fieldDefinition, array &$fields): void {
     $uri = $node->get($fieldName)->uri ?? '';
     $title = $node->get($fieldName)->title ?? '';
 
     $fields[$fieldName . '_uri'] = new FieldDto(
-      $fieldDefinition->getLabel(),
+      (string) $fieldDefinition->getLabel(),
       $uri
     );
 
     $fields[$fieldName . '_title'] = new FieldDto(
-      $fieldDefinition->getLabel(),
+      (string) $fieldDefinition->getLabel(),
       $title
     );
   }
@@ -278,7 +288,7 @@ class NodeEntityConverter extends AbstractEntityConverter {
    *   Field name, whose value(s) to resolve.
    * @param \Drupal\Core\Field\FieldDefinitionInterface $fieldDefinition
    *   Field definition.
-   * @param array $fields
+   * @param array<string, mixed> $fields
    *   Target collection where resolved values are inserted.
    */
   protected function resolveReferences(FieldableEntityInterface $node, string $fieldName, FieldDefinitionInterface $fieldDefinition, array &$fields): void {
@@ -303,38 +313,65 @@ class NodeEntityConverter extends AbstractEntityConverter {
         $fileStorage = $this->entityTypeManager->getStorage($handler);
         /** @var \Drupal\file\Entity\File $imageEntity */
         $imageEntity = $fileStorage->load($targetEntity->get('field_media_image')->{$prop});
-        $references[] = base64_encode(file_get_contents($imageEntity->getFileUri()));
-        $attr[] = $imageEntity->getMimeType();
-      } else {
+        $fileUri = $imageEntity->getFileUri();
+        if ($fileUri !== NULL) {
+          $references[] = base64_encode(file_get_contents($fileUri));
+          $attr[] = $imageEntity->getMimeType();
+        }
+      }
+      else {
         $references[] = $targetEntity->label();
       }
     }
 
     $fields[$fieldName] = new FieldDto(
-      $fieldDefinition->getLabel(),
+      (string) $fieldDefinition->getLabel(),
       $references,
       $attr
     );
   }
 
   /**
+   * Resolve 'path' type field values.
    *
+   * @param \Drupal\Core\Entity\FieldableEntityInterface $node
+   *   Node object.
+   * @param string $fieldName
+   *   Field name, whose value(s) to resolve.
+   * @param \Drupal\Core\Field\FieldDefinitionInterface $fieldDefinition
+   *   Field definition.
+   * @param array<string, mixed> $target
+   *   Target collection where resolved values are inserted.
    */
   protected function resolvePathAlias(FieldableEntityInterface $node, string $fieldName, FieldDefinitionInterface $fieldDefinition, array &$target): void {
     $mainProperty = $fieldDefinition->getFieldStorageDefinition()->getMainPropertyName();
 
     $target[$fieldName] = new FieldDto(
-      $fieldDefinition->getLabel(),
+      (string) $fieldDefinition->getLabel(),
       $node->get($fieldName)->{$mainProperty},
       []
     );
   }
 
+  /**
+   * Resolve 'daterange' type field values.
+   *
+   * @param \Drupal\Core\Entity\FieldableEntityInterface $node
+   *   Node object.
+   * @param string $fieldName
+   *   Field name, whose value(s) to resolve.
+   * @param \Drupal\Core\Field\FieldDefinitionInterface $fieldDefinition
+   *   Field definition.
+   * @param array<string, mixed> $target
+   *   Target collection where resolved values are inserted.
+   */
   protected function resolveDates(FieldableEntityInterface $node, string $fieldName, FieldDefinitionInterface $fieldDefinition, array &$target): void {
     $target[$fieldName] = new FieldDto(
-      $fieldDefinition->getLabel(),
+      (string) $fieldDefinition->getLabel(),
       [
+        // @phpstan-ignore-next-line
         'from' => $node->get($fieldName)->start_date->format('c'),
+        // @phpstan-ignore-next-line
         'to' => $node->get($fieldName)->end_date->format('c'),
       ],
       [

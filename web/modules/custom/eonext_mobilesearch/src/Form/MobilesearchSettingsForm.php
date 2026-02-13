@@ -4,6 +4,7 @@ namespace Drupal\eonext_mobilesearch\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use function Safe\preg_match;
 
 /**
  * Mobilesearch settings form class.
@@ -82,7 +83,7 @@ class MobilesearchSettingsForm extends ConfigFormBase {
   /**
    * {@inheritDoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
+  public function validateForm(array &$form, FormStateInterface $form_state): void {
     $agency = $form_state->getValue('agency');
 
     if (!preg_match('~\d{6}~', $agency)) {
@@ -93,7 +94,7 @@ class MobilesearchSettingsForm extends ConfigFormBase {
   /**
    * {@inheritDoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     $config = $this->config(self::CONFIG_ID);
 
     $form_state->setValue(

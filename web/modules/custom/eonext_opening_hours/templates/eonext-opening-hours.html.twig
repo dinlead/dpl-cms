@@ -20,9 +20,9 @@
                     {% for opening in item.opening_hours %}
                       <tr>
                         <td>{{ opening.categoryTerm.label }}</td>
-                        <td>{{ opening.startTime|date("H:i") }}
+                        <td>{{ opening.startTime|date('H:i') }}
                           -
-                          {{ opening.endTime|date("H:i") }}</td>
+                          {{ opening.endTime|date('H:i') }}</td>
                       </tr>
                     {% endfor %}
                   </tbody>

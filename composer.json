@@ -39,11 +39,11 @@
         {
             "type": "package",
             "package": {
-                "name": "inleadmedia/dpl-react",
+                "name": "dinlead/dpl-react",
                 "version": "0.0.0-dev",
                 "type": "drupal-library",
                 "dist": {
-                    "url": "https://github.com/inleadmedia/dpl-react/releases/download/branch-development/dist-development.zip",
+                    "url": "https://github.com/dinlead/dpl-react/releases/download/branch-development/dist-development.zip",
                     "type": "zip"
                 },
                 "require": {
@@ -195,7 +195,7 @@
         "drupal/webform_mailerlite": "^1.0",
         "drush/drush": "^13",
         "inleadmedia/dpl-design-system": "0.0.0-dev",
-        "inleadmedia/dpl-react": "0.0.0-dev",
+        "dinlead/dpl-react": "0.0.0-dev",
         "mnsami/composer-custom-directory-installer": "^2.0",
         "myclabs/php-enum": "^1.8",
         "npm-asset/select2": "^4.0",

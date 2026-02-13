@@ -37,6 +37,7 @@ class EonextResourceLinkFormatter extends LinkSeparateFormatter {
         // Unsanitized token replacement here because the entire link title
         // gets auto-escaped during link generation in
         // \Drupal\Core\Utility\LinkGenerator::generate().
+        // @phpstan-ignore-next-line
         $link_title = \Drupal::token()->replace($item->title, [$entity->getEntityTypeId() => $entity], ['clear' => TRUE]);
       }
 

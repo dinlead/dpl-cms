@@ -5,6 +5,9 @@ namespace Drupal\eonext_bibdk_sh\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
+/**
+ * Bibdk subject hierarchy settings form.
+ */
 class BibdkSettingsForm extends ConfigFormBase {
   public const FORM_ID = 'eonext_bibdk_sh.settings_form';
 
@@ -34,8 +37,8 @@ class BibdkSettingsForm extends ConfigFormBase {
       '#type' => 'number',
       '#min' => 1,
       '#max' => 90,
-      '#title' => t('CRON interval'),
-      '#description' => t('Fetch hierarchy metadata this often (days).'),
+      '#title' => $this->t('CRON interval'),
+      '#description' => $this->t('Fetch hierarchy metadata this often (days).'),
       '#config_target' => self::CONFIG_ID . ':cron_interval',
       '#required' => TRUE,
     ];

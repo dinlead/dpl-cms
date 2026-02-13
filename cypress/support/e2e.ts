@@ -21,6 +21,15 @@ import './commands';
 
 import 'cypress-plugin-api';
 
+// Ignore uncaught exceptions from cross-origin scripts (e.g. Google Translate).
+// These are third-party errors outside our control and should not fail tests.
+Cypress.on('uncaught:exception', (err) => {
+  if (err.message.includes('Script error')) {
+    return false;
+  }
+  return true;
+});
+
 // Collect logs for the console.
 import installLogsCollector from 'cypress-terminal-report/src/installLogsCollector';
 installLogsCollector();

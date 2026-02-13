@@ -117,6 +117,7 @@ class AlphabeticalFilter extends FilterPluginBase {
 
     if (!empty($selected_indexes)) {
       $index = reset($selected_indexes);
+      // @phpstan-ignore-next-line
       $this->query->addWhere(0, "{$table}.title", "{$index}%", 'LIKE');
     }
   }

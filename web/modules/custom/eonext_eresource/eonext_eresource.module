@@ -10,7 +10,7 @@ use Drupal\Core\Render\Element;
 /**
  * Implements hook_views_data_alter().
  *
- * @param array $data
+ * @param array<string, mixed> $data
  *   Existing implementations.
  */
 function eonext_eresource_views_data_alter(array &$data): void {
@@ -166,6 +166,7 @@ function eonext_eresource_preprocess_views_view_field__field_e_resource_link(arr
  * @see template_preprocess_views_view_fields__e_resource_list__block()
  */
 function template_preprocess_views_view_fields__e_resource_list__eresource_category(array &$variables): void {
+  /** @phpstan-ignore-next-line */
   template_preprocess_views_view_fields($variables);
 }
 
@@ -181,6 +182,7 @@ function template_preprocess_views_view_fields__e_resource_list__eresource_categ
  * @see eonext_eresource_theme()
  */
 function template_preprocess_views_view_fields__e_resource_list__block(array &$variables): void {
+  /** @phpstan-ignore-next-line */
   template_preprocess_views_view_fields($variables);
 
   foreach ($variables['fields'] as $field_name => $field) {

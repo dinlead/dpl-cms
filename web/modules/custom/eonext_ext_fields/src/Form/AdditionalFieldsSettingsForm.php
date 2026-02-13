@@ -7,6 +7,9 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\ConfigTarget;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use function Safe\json_decode;
+use function Safe\preg_match;
+use function Safe\preg_replace;
 
 /**
  * Additional fields settings form class.
@@ -39,7 +42,7 @@ class AdditionalFieldsSettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): static {
     return new static(
       $container->get('extension.list.module')
     );
@@ -136,6 +139,7 @@ class AdditionalFieldsSettingsForm extends ConfigFormBase {
       '#config_target' => new ConfigTarget(
         self::CONFIG_ID,
         'block_loans',
+        // @phpstan-ignore argument.type
         toConfig: static::class . '::formatBlockLoans'
       ),
     ];

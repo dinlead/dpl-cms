@@ -12,7 +12,7 @@ interface TranslationServiceInterface {
   /**
    * Get the footer state.
    *
-   * @return array
+   * @return array<string, mixed>
    *   The footer state settings.
    */
   public function getFooterState(): array;
@@ -25,7 +25,7 @@ interface TranslationServiceInterface {
   /**
    * Get the footer settings.
    *
-   * @return array
+   * @return array<string, mixed>
    *   The footer settings.
    */
   public function getFooterSettings(): array;
@@ -33,7 +33,7 @@ interface TranslationServiceInterface {
   /**
    * Get the language links.
    *
-   * @return array
+   * @return array<string, mixed>
    *   The language links.
    */
   public function getLanguageLinks(): array;
@@ -41,7 +41,7 @@ interface TranslationServiceInterface {
   /**
    * Add branch attributes to the variables.
    *
-   * @param array $variables
+   * @param array<string, mixed> $variables
    *   The variables to add the attributes to.
    * @param \Drupal\node\NodeInterface|null $branch
    *   The branch node.

@@ -78,7 +78,7 @@ class MobilesearchNodesExportForm extends ConfigFormBase {
   /**
    * {@inheritDoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     $config = $this->config(self::CONFIG_ID);
 
     $node_types = $form_state->get('node_types') ?? [];

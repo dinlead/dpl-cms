@@ -23,6 +23,7 @@ use Drupal\image\Entity\ImageStyle;
 use Drupal\media\MediaInterface;
 use Drupal\paragraphs\ParagraphInterface;
 use Drupal\recurring_events\Entity\EventSeries;
+use Safe\DateTime;
 
 /**
  * Provides a service to map event data for REST API.
@@ -54,6 +55,9 @@ class EventRestMapper extends EventsRestMapperDefault {
   public function getResponse(EventInstance $event_instance): EventsGET200ResponseInner {
     $this->event = $event_instance;
 
+    /** @var \Drupal\recurring_events\Entity\EventSeries $eventSeries */
+    $eventSeries = $this->event->get('eventseries_id')->entity;
+
     $response = new EventsGET200ResponseInner([
       'title' => $this->getValue('title'),
       'uuid' => $this->event->uuid(),
@@ -78,7 +82,7 @@ class EventRestMapper extends EventsRestMapperDefault {
       'externalData' => $this->getExternalData(),
       'screenNames' => $this->event->getScreenNames(),
       'ribbon' => $this->ribbonService->getRibbon(
-        $this->event->get('eventseries_id')->entity,
+        $eventSeries,
         $this->event,
       ),
     ]);
@@ -205,6 +209,9 @@ class EventRestMapper extends EventsRestMapperDefault {
 
   /**
    * {@inheritDoc}
+   *
+   * @return array<int, string>
+   *   The branch names.
    */
   private function getBranches(): array {
     $names = [];
@@ -252,6 +259,9 @@ class EventRestMapper extends EventsRestMapperDefault {
 
   /**
    * {@inheritDoc}
+   *
+   * @return array<int, string>
+   *   The taxonomy term names.
    */
   private function getTaxonomyNames(string $field_key): array {
     $names = [];
@@ -268,6 +278,9 @@ class EventRestMapper extends EventsRestMapperDefault {
 
   /**
    * {@inheritDoc}
+   *
+   * @return array<int, string>
+   *   The tag names.
    */
   private function getTags(): array {
     return $this->getTaxonomyNames('event_tags');
@@ -275,6 +288,9 @@ class EventRestMapper extends EventsRestMapperDefault {
 
   /**
    * {@inheritDoc}
+   *
+   * @return array<int, string>
+   *   The category names.
    */
   private function getCategories(): array {
     return $this->getTaxonomyNames('event_categories');
@@ -282,6 +298,9 @@ class EventRestMapper extends EventsRestMapperDefault {
 
   /**
    * {@inheritDoc}
+   *
+   * @return array<int, string>
+   *   The multi-value field values.
    */
   private function getMultiValue(string $field_name): array {
     $field = $this->event->getField($field_name);
@@ -298,6 +317,9 @@ class EventRestMapper extends EventsRestMapperDefault {
 
   /**
    * {@inheritDoc}
+   *
+   * @return array<int, EventsGET200ResponseInnerTicketCategoriesInner>
+   *   The ticket categories.
    */
   private function getTicketCategories(): array {
 
@@ -350,7 +372,7 @@ class EventRestMapper extends EventsRestMapperDefault {
       return NULL;
     }
 
-    $date = new \DateTime();
+    $date = new DateTime();
     $date->setTimestamp(intval($timestamp));
 
     return $date;
@@ -377,9 +399,9 @@ class EventRestMapper extends EventsRestMapperDefault {
 
     $site_timezone = new \DateTimeZone(date_default_timezone_get());
 
-    $date_start = new \DateTime($start, new \DateTimeZone('UTC'));
+    $date_start = new DateTime($start, new \DateTimeZone('UTC'));
     $date_start->setTimezone($site_timezone);
-    $date_end = new \DateTime($end, new \DateTimeZone('UTC'));
+    $date_end = new DateTime($end, new \DateTimeZone('UTC'));
     $date_end->setTimezone($site_timezone);
 
     return new EventsGET200ResponseInnerDateTime([

@@ -68,7 +68,7 @@ function eonext_mobilesearch_entity_delete(EntityInterface $entity): void {
  */
 function eonext_mobilesearch_mobilesearch_push_alter(MobilesearchEntityInterface $payload, EntityInterface $entity): void {
   if ($entity->getEntityTypeId() === 'eventinstance') {
-    $payload->setNid(20000000 + (int) $payload->getNid());
+    $payload->setNid((string) (20000000 + (int) $payload->getNid()));
   }
 
   $type = $payload->getType();
@@ -128,11 +128,11 @@ function eonext_mobilesearch_mobilesearch_push_alter(MobilesearchEntityInterface
   ];
 
   foreach ($fields_replacement_map as $field => $replacement) {
-    if (array_key_exists($field, $fields)) {
-      /** @var \Drupal\eonext_mobilesearch\Mobilesearch\DTO\FieldDto $dto_field */
-      $dto_field = $fields[$field];
-      unset($fields[$field]);
-      $fields[$replacement] = $dto_field;
+    if (array_key_exists($field, $taxonomy)) {
+      /** @var \Drupal\eonext_mobilesearch\Mobilesearch\DTO\TaxonomyDto $dto_field */
+      $dto_field = $taxonomy[$field];
+      unset($taxonomy[$field]);
+      $taxonomy[$replacement] = $dto_field;
     }
   }
 

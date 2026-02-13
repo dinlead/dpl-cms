@@ -10,7 +10,7 @@ class RequestDto implements \JsonSerializable {
   /**
    * DTO constructor.
    *
-   * @param array $credentials
+   * @param array<string, string> $credentials
    *   Authorization information.
    * @param \JsonSerializable|null $body
    *   Request payload body.
@@ -41,7 +41,7 @@ class RequestDto implements \JsonSerializable {
   /**
    * Gets authorization credentials.
    *
-   * @return array
+   * @return array<string, string>
    *   Credentials information.
    */
   public function getCredentials(): array {

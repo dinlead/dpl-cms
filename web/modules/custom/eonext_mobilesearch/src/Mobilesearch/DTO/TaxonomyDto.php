@@ -9,6 +9,11 @@ class TaxonomyDto implements \JsonSerializable {
 
   /**
    * DTO constructor.
+   *
+   * @param string $name
+   *   Taxonomy name.
+   * @param array<int, string> $terms
+   *   Taxonomy terms.
    */
   public function __construct(
     protected string $name,
@@ -42,7 +47,7 @@ class TaxonomyDto implements \JsonSerializable {
   /**
    * Gets taxonomy field values.
    *
-   * @return array
+   * @return array<int, string>
    *   Taxonomy values (terms).
    */
   public function getValue(): array {
@@ -52,7 +57,7 @@ class TaxonomyDto implements \JsonSerializable {
   /**
    * Sets taxonomy values.
    *
-   * @param array $value
+   * @param array<int, string> $value
    *   Taxonomy values (terms)
    *
    * @return self
@@ -65,6 +70,9 @@ class TaxonomyDto implements \JsonSerializable {
 
   /**
    * {@inheritDoc}
+   *
+   * @return array<string, mixed>
+   *   The serialized taxonomy data.
    */
   public function jsonSerialize(): array {
     return [

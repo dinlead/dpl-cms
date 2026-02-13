@@ -9,6 +9,13 @@ class FieldDto implements \JsonSerializable {
 
   /**
    * DTO constructor.
+   *
+   * @param string $name
+   *   Field name.
+   * @param mixed $value
+   *   Field value.
+   * @param array<int|string, mixed> $attr
+   *   Field attributes.
    */
   public function __construct(
     protected string $name,
@@ -67,7 +74,7 @@ class FieldDto implements \JsonSerializable {
   /**
    * Gets field attributes.
    *
-   * @return array
+   * @return array<int|string, mixed>
    *   Field attributes (additional data).
    */
   public function getAttr(): array {
@@ -77,7 +84,7 @@ class FieldDto implements \JsonSerializable {
   /**
    * Sets field attributes.
    *
-   * @param array $attr
+   * @param array<int|string, mixed> $attr
    *   Field attributes (additional data)
    *
    * @return self
@@ -91,6 +98,9 @@ class FieldDto implements \JsonSerializable {
 
   /**
    * {@inheritDoc}
+   *
+   * @return array<string, mixed>
+   *   The serialized field data.
    */
   public function jsonSerialize(): array {
     return [

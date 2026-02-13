@@ -6,6 +6,8 @@
  */
 
 use Drupal\eonext_ext_fields\Form\AdditionalFieldsSettingsForm;
+use function Safe\json_decode;
+use function Safe\preg_replace;
 
 /**
  * Preprocesses DPL react app variables with extended field data.

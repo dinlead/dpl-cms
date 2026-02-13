@@ -12,7 +12,7 @@ use Drupal\views\Views;
 /**
  * Implements hook_theme().
  */
-function eonext_staff_theme($existing, $type, $theme, $path) {
+function eonext_staff_theme(array $existing, string $type, string $theme, string $path): array {
   return [
     'paragraph__eonext_library_staff' => [
       'variables' => [],

@@ -22,7 +22,8 @@ final class LibraryStaffAccessControlHandler extends EntityAccessControlHandler 
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account): AccessResult {
-    if ($account->hasPermission($this->entityType->getAdminPermission())) {
+    $adminPermission = $this->entityType->getAdminPermission();
+    if (is_string($adminPermission) && $account->hasPermission($adminPermission)) {
       return AccessResult::allowed()->cachePerPermissions();
     }
 
@@ -36,6 +37,13 @@ final class LibraryStaffAccessControlHandler extends EntityAccessControlHandler 
 
   /**
    * {@inheritdoc}
+   *
+   * @param \Drupal\Core\Session\AccountInterface $account
+   *   The user session for which to check access.
+   * @param array<string, mixed> $context
+   *   An associative array of additional context values.
+   * @param string|null $entity_bundle
+   *   The entity bundle name, or NULL.
    */
   protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL): AccessResult {
     return AccessResult::allowedIfHasPermissions($account, ['edit eonext_library_staff', 'administer eonext_library_staff'], 'OR');

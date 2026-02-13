@@ -103,6 +103,9 @@ class TranslationService implements TranslationServiceInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * @return array<string, mixed>
+   *   The footer state values.
    */
   public function getFooterState(): array {
     return $this->state->get(static::FOOTER_SETTINGS_STATE, []);
@@ -129,9 +132,12 @@ class TranslationService implements TranslationServiceInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * @return array<string, mixed>
+   *   The footer settings.
    */
   public function getFootersettings(): array {
-    $config = $this->configFactory->get(static::FOOTER_SETTINGS) ?: [];
+    $config = $this->configFactory->get(static::FOOTER_SETTINGS);
     $data = $config->get();
 
     // Remove the _core and langcode key.
@@ -143,6 +149,9 @@ class TranslationService implements TranslationServiceInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * @return array<string, mixed>
+   *   The language links.
    */
   public function getLanguageLinks(): array {
 
@@ -150,6 +159,10 @@ class TranslationService implements TranslationServiceInterface {
     $languageManagerLinks = $this
       ->languageManager
       ->getLanguageSwitchLinks('language_interface', $this->getCurrentUrl());
+
+    if (!$languageManagerLinks) {
+      return [];
+    }
 
     $enabledLanguages = $this->getEnabledLanguages();
 
@@ -166,6 +179,7 @@ class TranslationService implements TranslationServiceInterface {
         continue;
       }
 
+      // @phpstan-ignore property.notFound
       $langUrl->setOption('language', $languageManagerLinks->links[$langCode]['language']);
 
       $links[$langCode] = [
@@ -204,7 +218,7 @@ class TranslationService implements TranslationServiceInterface {
   /**
    * Get the enabled languages.
    *
-   * @return array
+   * @return array<string, mixed>
    *   The enabled languages.
    */
   private function getEnabledLanguages(): array {
@@ -253,6 +267,11 @@ class TranslationService implements TranslationServiceInterface {
 
   /**
    * {@inheritdoc}
+   *
+   * @param array<string, mixed> $variables
+   *   The variables to add the attributes to.
+   * @param \Drupal\node\NodeInterface|null $branch
+   *   The branch node entity, or NULL.
    */
   public static function addBranchAttributes(array &$variables, NodeInterface|Null $branch = NULL): void {
     if ($branch) {

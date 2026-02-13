@@ -18,6 +18,6 @@ interface LibraryStaffInterface extends ContentEntityInterface, EntityChangedInt
    * @param int $userId
    *   The user ID to set.
    */
-  public function setUserId(int $userId);
+  public function setUserId(int $userId): static;
 
 }

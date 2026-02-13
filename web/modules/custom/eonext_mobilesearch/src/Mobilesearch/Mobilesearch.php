@@ -11,6 +11,7 @@ use Drupal\eonext_mobilesearch\Form\MobilesearchSettingsForm;
 use Drupal\eonext_mobilesearch\Mobilesearch\DTO\MobilesearchEntityInterface;
 use Drupal\eonext_mobilesearch\Mobilesearch\DTO\RequestDto;
 use GuzzleHttp\ClientInterface;
+use function Safe\array_walk_recursive;
 
 /**
  * MobileSearch service comunication.

@@ -7,6 +7,9 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+use function Safe\json_decode;
+use function Safe\preg_replace;
+
 /**
  * Advanced search settings form.
  */
@@ -35,7 +38,7 @@ class AdvancedSearchConfigForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
+  public static function create(ContainerInterface $container): static {
     return new static(
       $container->get('extension.list.module')
     );

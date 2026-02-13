@@ -9,6 +9,8 @@ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
+use function Safe\simplexml_load_string;
+
 /**
  * Fetches Bibdk subject hierarchy metadata from remote source.
  */
@@ -76,9 +78,14 @@ class BibdkMetadataFetcher {
    *   TRUE if valid XML, FALSE otherwise.
    */
   protected function isXml(string $input): bool {
-    $xml = simplexml_load_string($input);
+    try {
+      simplexml_load_string($input);
 
-    return $xml !== FALSE;
+      return TRUE;
+    }
+    catch (\Exception $e) {
+      return FALSE;
+    }
   }
 
 }

@@ -47,9 +47,17 @@ jobs:
     - name: Install Dependencies
       run: |
         composer install --no-interaction --no-progress
-    - name: Run Twig CS Fixer
+    - name: Run PHPCS
       run: |
+        vendor/bin/phpcs -q > phpcs-report.txt 2>&1 || true
         vendor/bin/phpcs -q --report=checkstyle | cs2pr
+    - name: Upload PHPCS report
+      if: always()
+      uses: actions/upload-artifact@v5
+      with:
+        name: phpcs-report
+        path: phpcs-report.txt
+        if-no-files-found: ignore
 
   TwigCsFixer:
     name: Check Twig code style
@@ -68,7 +76,15 @@ jobs:
           composer install --no-interaction --no-progress
       - name: Run Twig CS Fixer
         run: |
+          vendor/bin/twig-cs-fixer lint 2>&1 | tee twig-cs-report.txt || true
           vendor/bin/twig-cs-fixer lint --report=github
+      - name: Upload Twig CS Fixer report
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: twig-cs-fixer-report
+          path: twig-cs-report.txt
+          if-no-files-found: ignore
 
   Phpstan:
     name: Analyse code using PHPStan
@@ -88,7 +104,14 @@ jobs:
           composer config bin-dir --absolute >> "${GITHUB_PATH}"
       - name: PHPStan analyse
         run: |
-          phpstan
+          phpstan 2>&1 | tee phpstan-report.txt
+      - name: Upload PHPStan report
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: phpstan-report
+          path: phpstan-report.txt
+          if-no-files-found: ignore
 
   PhpUnit:
     name: Run PHP unit tests
@@ -106,7 +129,17 @@ jobs:
         run: |
           composer install --no-interaction --no-progress
       - name: Run PhpUnit
-        run: ./vendor/bin/phpunit --coverage-text
+        run: |
+          ./vendor/bin/phpunit --coverage-text --log-junit phpunit-junit.xml 2>&1 | tee phpunit-report.txt
+      - name: Upload PhpUnit report
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: phpunit-report
+          path: |
+            phpunit-report.txt
+            phpunit-junit.xml
+          if-no-files-found: ignore
 
   LightHouse:
     name: Test site performance using Lighthouse
@@ -126,6 +159,7 @@ jobs:
       - name: Run Lighthouse test
         run: task ci:lighthouse
       - name: Archive logs
+        if: always()
         uses: actions/upload-artifact@v5
         with:
           name: lighthouse-results
@@ -203,7 +237,15 @@ jobs:
       - name: Install problem matcher
         uses: xt0rted/markdownlint-problem-matcher@v3
       - name: Lint Markdown
-        run: npx markdownlint-cli2
+        run: |
+          npx markdownlint-cli2 2>&1 | tee markdownlint-report.txt
+      - name: Upload MarkdownLint report
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: markdownlint-report
+          path: markdownlint-report.txt
+          if-no-files-found: ignore
 
   Shellcheck:
     name: Shellcheck
@@ -242,7 +284,15 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Run ESLint
-        run: npx eslint web -c .eslintrc.json
+        run: |
+          npx eslint web -c .eslintrc.json 2>&1 | tee eslint-drupal-report.txt
+      - name: Upload ESLint Drupal report
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: eslint-drupal-report
+          path: eslint-drupal-report.txt
+          if-no-files-found: ignore
 
   EslintCypress:
     name: Lint Cypress tests
@@ -260,7 +310,15 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
       - name: Run ESLint
-        run: npx eslint cypress -c cypress/.eslintrc.json
+        run: |
+          npx eslint cypress -c cypress/.eslintrc.json 2>&1 | tee eslint-cypress-report.txt
+      - name: Upload ESLint Cypress report
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: eslint-cypress-report
+          path: eslint-cypress-report.txt
+          if-no-files-found: ignore
 
   CheckOpenApiSpec:
     name: Check OpenAPI specification
@@ -282,11 +340,24 @@ jobs:
       - name: Download current specification
         run: task ci:openapi:download
       - name: Ensure specification has not drifted
-        run: git diff --ignore-space-at-eol --exit-code openapi.json
+        run: |
+          git diff --ignore-space-at-eol openapi.json > openapi-drift.diff 2>&1 || true
+          git diff --ignore-space-at-eol --exit-code openapi.json
       - name: Generate package for CMS API specification
         run: task dev:codegen:dpl-cms
       - name: Ensure CMS API package code has not drifted
-        run: git diff --ignore-space-at-eol --exit-code packages/cms-api/*
+        run: |
+          git diff --ignore-space-at-eol packages/cms-api/* > cms-api-drift.diff 2>&1 || true
+          git diff --ignore-space-at-eol --exit-code packages/cms-api/*
+      - name: Upload OpenAPI drift reports
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: openapi-drift-report
+          path: |
+            openapi-drift.diff
+            cms-api-drift.diff
+          if-no-files-found: ignore
 
   CheckGraphQlSchema:
     name: Check GraphQL specification
@@ -308,7 +379,16 @@ jobs:
       - name: Extract GraphQL schema and generate client
         run: task dev:codegen:bnf-graphql
       - name: Ensure GraphQL client code has not drifted
-        run: git diff --ignore-space-at-eol --exit-code web/modules/custom/bnf/src/GraphQL/*
+        run: |
+          git diff --ignore-space-at-eol web/modules/custom/bnf/src/GraphQL/* > graphql-drift.diff 2>&1 || true
+          git diff --ignore-space-at-eol --exit-code web/modules/custom/bnf/src/GraphQL/*
+      - name: Upload GraphQL drift report
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: graphql-drift-report
+          path: graphql-drift.diff
+          if-no-files-found: ignore
 
   CheckDrupalConfig:
     name: Check Drupal Config
@@ -328,7 +408,16 @@ jobs:
       - name: Export configuration
         run: task dev:cli -- drush config-export -y
       - name: Check for uncommited configuration after install
-        run: git diff --ignore-space-at-eol --exit-code config/sync/*.yml
+        run: |
+          git diff --ignore-space-at-eol config/sync/*.yml > drupal-config-drift.diff 2>&1 || true
+          git diff --ignore-space-at-eol --exit-code config/sync/*.yml
+      - name: Upload Drupal config drift report
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: drupal-config-drift-report
+          path: drupal-config-drift.diff
+          if-no-files-found: ignore
 
   CheckPhpVersion:
     name: Check PHP version

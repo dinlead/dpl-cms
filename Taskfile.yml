@@ -185,7 +185,7 @@ tasks:
       # Always reinstall packages tracking develop builds. The content of such
       # packages may change without composer package version changes so ensure
       # we have the latest version.
-      - task dev:cli -- composer reinstall inleadmedia/dpl-design-system inleadmedia/dpl-react --no-cache
+      - task dev:cli -- composer reinstall inleadmedia/dpl-design-system dinlead/dpl-react --no-cache
       # (Re)run Drupal scaffolding.
       - task dev:cli -- composer drupal:scaffold
       # Build dev scripts
@@ -402,11 +402,11 @@ tasks:
     cmds:
       - task: dev:composer:update-package
         vars:
-          NAME: "inleadmedia/dpl-react"
+          NAME: "dinlead/dpl-react"
           VERSION:
             sh: "echo ${VERSION:-0.0.0-dev}"
           DOWNLOAD_URL:
-            sh: gh release view ${RELEASE:-branch-$BRANCH} --repo inleadmedia/dpl-react --json assets | jq -r '.assets[].url'
+            sh: gh release view ${RELEASE:-branch-$BRANCH} --repo dinlead/dpl-react --json assets | jq -r '.assets[].url'
     preconditions:
       - sh: "[[ -z $BRANCH || -z $RELEASE ]]"
         msg: Please provide a BRANCH or RELEASE environment variable with the name of the React components branch/release to use

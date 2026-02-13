@@ -4,7 +4,6 @@ namespace Drupal\eonext_eresource\Plugin\Block;
 
 use Drupal\Core\Block\Attribute\Block;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
@@ -89,8 +88,7 @@ class CategoryFilterBlock extends BlockBase implements ContainerFactoryPluginInt
   /**
    * {@inheritDoc}
    */
-//  public function getCacheTags(): array {
-//    return Cache::mergeTags(['node_list:e_resource'], parent::getCacheTags());
-//  }
-
+  // Public function getCacheTags(): array {
+  //    return Cache::mergeTags(['node_list:e_resource'], parent::getCacheTags());
+  //  }
 }

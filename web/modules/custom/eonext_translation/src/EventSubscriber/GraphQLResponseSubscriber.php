@@ -66,7 +66,7 @@ class GraphQLResponseSubscriber implements EventSubscriberInterface {
     }
   }
 
-    /**
+  /**
    * Remove language prefix from a URL.
    *
    * @param string $url

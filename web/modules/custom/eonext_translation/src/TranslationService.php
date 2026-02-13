@@ -92,7 +92,8 @@ class TranslationService implements TranslationServiceInterface {
     ConfigFactoryInterface $config_factory,
     LanguageManagerInterface $language_manager,
     PathMatcherInterface $path_matcher,
-    RouteMatchInterface $route_match) {
+    RouteMatchInterface $route_match,
+  ) {
     $this->state = $state;
     $this->configFactory = $config_factory;
     $this->languageManager = $language_manager;

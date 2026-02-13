@@ -2,7 +2,6 @@
 
 namespace Drupal\eonext_eresource\Plugin\views\filter;
 
-use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
@@ -125,8 +124,7 @@ class AlphabeticalFilter extends FilterPluginBase {
   /**
    * {@inheritdoc}
    */
-//  public function getCacheTags(): array {
-//    return Cache::mergeTags(['node_list:e_resource'], parent::getCacheTags());
-//  }
-
+  // Public function getCacheTags(): array {
+  //    return Cache::mergeTags(['node_list:e_resource'], parent::getCacheTags());
+  //  }
 }

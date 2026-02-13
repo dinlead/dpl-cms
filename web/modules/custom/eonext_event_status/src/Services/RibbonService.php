@@ -23,7 +23,7 @@ class RibbonService {
    * @return array|null
    *   An array containing the ribbon text and color, or NULL if no ribbon.
    */
-  public function getRibbon(EventSeries $event_series, EventInstance $event_instance = NULL) {
+  public function getRibbon(EventSeries $event_series, ?EventInstance $event_instance = NULL) {
     // Default to series values.
     $ribbonText = $event_series->get('field_ribbon_text')->getString();
     $ribbonColor = $event_series->get('field_ribbon_color')->getString();

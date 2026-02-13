@@ -68,6 +68,9 @@ function eonext_eresource_theme(): array {
   ];
 }
 
+/**
+ *
+ */
 function template_preprocess_node__e_resource__full(&$variables): void {
   template_preprocess_node($variables);
 
@@ -85,31 +88,31 @@ function template_preprocess_node__e_resource__full(&$variables): void {
 
   $variables['title_attributes']['class'][] = 'title';
 
-  // @todo: Somehow figure out how to generate e-resource overview link.
-//  $overview_link = $variables['node']->toLink()->toRenderable();
-//  $overview_link['#title'] = t('E-resources & media');
-//  $overview_link['#attributes']['class'][] = 'link-tag';
-//
-//  $variables['e_resources_link'] = [
-//    '#type' => 'html_tag',
-//    '#tag' => 'div',
-//    '#attributes' => [
-//      'class' => [
-//        'views-field',
-//        'views-field-see-more'
-//      ],
-//    ],
-//    'child' => [
-//      '#type' => 'html_tag',
-//      '#tag' => 'div',
-//      '#attributes' => [
-//        'class' => [
-//          'field-content',
-//        ],
-//      ],
-//      'child' => $overview_link,
-//    ],
-//  ];
+  // @todo Somehow figure out how to generate e-resource overview link.
+  //   $overview_link = $variables['node']->toLink()->toRenderable();
+  //  $overview_link['#title'] = t('E-resources & media');
+  //  $overview_link['#attributes']['class'][] = 'link-tag';
+  //
+  //  $variables['e_resources_link'] = [
+  //    '#type' => 'html_tag',
+  //    '#tag' => 'div',
+  //    '#attributes' => [
+  //      'class' => [
+  //        'views-field',
+  //        'views-field-see-more'
+  //      ],
+  //    ],
+  //    'child' => [
+  //      '#type' => 'html_tag',
+  //      '#tag' => 'div',
+  //      '#attributes' => [
+  //        'class' => [
+  //          'field-content',
+  //        ],
+  //      ],
+  //      'child' => $overview_link,
+  //    ],
+  //  ];
 }
 
 /**

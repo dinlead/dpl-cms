@@ -9,6 +9,9 @@ use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
+/**
+ *
+ */
 class BibdkMetadataFetcher {
 
   public const BIBDK_FILE_URL = 'https://raw.githubusercontent.com/DBCDK/bibdk_subject_hierarchy/master/data/emnehierarki_full.xml';
@@ -20,9 +23,12 @@ class BibdkMetadataFetcher {
   public function __construct(
     protected Client $httpClient,
     protected FileSystem $fileSystem,
-    protected LoggerChannelFactoryInterface $loggerChannelFactory
+    protected LoggerChannelFactoryInterface $loggerChannelFactory,
   ) {}
 
+  /**
+   *
+   */
   public function getBibdkMetadata(string $url = self::BIBDK_FILE_URL): void {
     try {
       $response = $this->httpClient->get(self::BIBDK_FILE_URL);
@@ -47,10 +53,16 @@ class BibdkMetadataFetcher {
     $this->fileSystem->saveData($contents, self::BIBDK_FILE_PATH . self::BIBDK_FILE_NAME, FileExists::Replace);
   }
 
+  /**
+   *
+   */
   public function bibdkHierarchyFileExists(): bool {
     return is_readable(self::BIBDK_FILE_PATH . self::BIBDK_FILE_NAME);
   }
 
+  /**
+   *
+   */
   protected function isXml(string $input): bool {
     $xml = simplexml_load_string($input);
 

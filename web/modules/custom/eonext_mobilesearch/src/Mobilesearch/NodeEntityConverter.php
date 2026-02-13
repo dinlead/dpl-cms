@@ -13,7 +13,6 @@ use Drupal\eonext_mobilesearch\Form\MobilesearchSettingsForm;
 use Drupal\eonext_mobilesearch\Mobilesearch\DTO\FieldDto;
 use Drupal\eonext_mobilesearch\Mobilesearch\DTO\NodeEntityDto;
 use Drupal\eonext_mobilesearch\Mobilesearch\DTO\TaxonomyDto;
-use Drupal\node\NodeInterface;
 
 /**
  * Converts a node entity into a serializable object.
@@ -40,10 +39,9 @@ class NodeEntityConverter extends AbstractEntityConverter {
    * {@inheritDoc}
    */
   public function convert(EntityInterface $entity): NodeEntityDto {
-//    if (!$entity instanceof NodeInterface) {
-//      throw new \RuntimeException('Only node entities can be used in this context.');
-//    }
-
+    // If (!$entity instanceof NodeInterface) {
+    //      throw new \RuntimeException('Only node entities can be used in this context.');
+    //    }.
     $fieldDefinitions = $this->entityFieldManager->getFieldDefinitions(
       $entity->getEntityTypeId(),
       $entity->getType()
@@ -305,7 +303,8 @@ class NodeEntityConverter extends AbstractEntityConverter {
         $imageEntity = $fileStorage->load($targetEntity->get('field_media_image')->{$prop});
         $references[] = base64_encode(file_get_contents($imageEntity->getFileUri()));
         $attr[] = $imageEntity->getMimeType();
-      } else {
+      }
+      else {
         $references[] = $targetEntity->label();
       }
     }
@@ -330,6 +329,9 @@ class NodeEntityConverter extends AbstractEntityConverter {
     );
   }
 
+  /**
+   *
+   */
   protected function resolveDates(FieldableEntityInterface $node, string $fieldName, FieldDefinitionInterface $fieldDefinition, array &$target): void {
     $target[$fieldName] = new FieldDto(
       $fieldDefinition->getLabel(),

@@ -73,7 +73,8 @@ function eonext_mobilesearch_mobilesearch_push_alter(MobilesearchEntityInterface
   $payload->setType(match($type) {
     'page' => 'ding_page',
     'article' => 'ding_news',
-    'default' => 'ding_event', // 'default' is the default bundle for events
+    // 'default' is the default bundle for events
+    'default' => 'ding_event',
     default => $type
   });
 
@@ -133,16 +134,15 @@ function eonext_mobilesearch_mobilesearch_push_alter(MobilesearchEntityInterface
     }
   }
 
-//  $removal_map = [
-//    'vid',
-//    'revision_timestamp', 'revision_log',
-//    'status', 'promote',
-//    'sticky', 'default_langcode',
-//    'revision_default', 'revision_translation_affected',
-//  ];
-//  foreach ($removal_map as $field) {
-//    unset($fields[$field]);
-//  }
-
+  // $removal_map = [
+  //    'vid',
+  //    'revision_timestamp', 'revision_log',
+  //    'status', 'promote',
+  //    'sticky', 'default_langcode',
+  //    'revision_default', 'revision_translation_affected',
+  //  ];
+  //  foreach ($removal_map as $field) {
+  //    unset($fields[$field]);
+  //  }
   $payload->setTaxonomy($taxonomy);
 }

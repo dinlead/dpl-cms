@@ -20,7 +20,7 @@ class EventsGET200ResponseInner extends EventsGET200ResponseInnerDefault {
    * @param array|null $data
    *   Associated array of property values initializing the model.
    */
-  public function __construct(array $data = NULL) {
+  public function __construct(?array $data = NULL) {
     parent::__construct($data);
     if (is_array($data)) {
       $this->ribbon = array_key_exists('ribbon', $data) ? $data['ribbon'] : $this->ribbon;

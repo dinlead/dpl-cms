@@ -5,7 +5,7 @@ namespace Drupal\eonext_translation;
 use Drupal\node\NodeInterface;
 
 /**
- * Interface for translation service..
+ * Interface for translation service.
  */
 interface TranslationServiceInterface {
 

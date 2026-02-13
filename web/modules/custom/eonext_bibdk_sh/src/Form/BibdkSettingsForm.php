@@ -5,6 +5,9 @@ namespace Drupal\eonext_bibdk_sh\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
+/**
+ *
+ */
 class BibdkSettingsForm extends ConfigFormBase {
   public const FORM_ID = 'eonext_bibdk_sh.settings_form';
 
